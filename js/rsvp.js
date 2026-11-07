@@ -5,6 +5,9 @@
 // URL de Google Apps Script para almacenar confirmaciones en Google Sheets
 const GOOGLE_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDgRmvmNH7FMLr6Tfp31uURt8r7ICrPDJP2zwfli8eJ4Y5uiVjBZ78oQC0DW9ZT8mL/exec";
 
+// Teléfono oficial de WhatsApp para recibir las confirmaciones (+52 1 311 255 6817)
+const WHATSAPP_PHONE_NUMBER = "5213112556817";
+
 // Guardar en Google Sheets en segundo plano
 async function saveToGoogleSheets(record) {
   if (!GOOGLE_SHEETS_SCRIPT_URL) return;
@@ -100,7 +103,7 @@ function initRsvpForm() {
       text += `\n¡Felicidades por su matrimonio! 🥂🌿`;
 
       const encodedText = encodeURIComponent(text);
-      const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+      const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodedText}`;
 
       // Si asiste, poblar y abrir el pase de gala
       if (attendance === 'si') {
