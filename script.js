@@ -170,8 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1BodaAlexisEstefaniaDriveFolder?usp=sharing";
 
   // 2. URL de Google Apps Script para guardar confirmaciones en Google Sheets en tiempo real
-  // (Pega aquí la URL de tu Web App cuando crees el script en tu hoja de cálculo)
-  const GOOGLE_SHEETS_SCRIPT_URL = "";
+  const GOOGLE_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDgRmvmNH7FMLr6Tfp31uURt8r7ICrPDJP2zwfli8eJ4Y5uiVjBZ78oQC0DW9ZT8mL/exec";
 
   // Actualizar enlace y QR automáticamente
   const driveUploadBtn = document.getElementById('driveUploadBtn');
