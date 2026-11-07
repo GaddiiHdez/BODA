@@ -366,7 +366,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const attendance = document.querySelector('input[name="attendance"]:checked')?.value || 'si';
       const guestCount = document.getElementById('guestCount')?.value || '1';
       const guestMessage = document.getElementById('guestMessage')?.value.trim() || '';
-      const ticketCode = generateTicketCode();
+
+      // Evitar códigos duplicados si el invitado ya se registró previamente en este dispositivo
+      const normalizedNameKey = `rsvp_ticket_${guestName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '_')}`;
+      const savedCode = localStorage.getItem(normalizedNameKey);
+      const ticketCode = savedCode || generateTicketCode();
+      if (!savedCode && attendance === 'si') {
+        localStorage.setItem(normalizedNameKey, ticketCode);
+      }
 
       // Guardar en Google Sheets en segundo plano
       saveToGoogleSheets({
