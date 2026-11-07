@@ -21,6 +21,10 @@ function initStoryCarousel() {
   const nextBtn = document.getElementById('storyNext');
   const posEl = document.getElementById('storyPosition');
 
+  if (posEl) {
+    posEl.textContent = `01 / 0${slides.length}`;
+  }
+
   if (prevBtn) prevBtn.onclick = () => move(-1);
   if (nextBtn) nextBtn.onclick = () => move(1);
 
