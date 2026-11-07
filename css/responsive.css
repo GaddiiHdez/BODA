@@ -1,0 +1,217 @@
+/* ========================================================
+   ANIMACIONES, SCROLL REVEAL Y RESPONSIVE DESIGN
+======================================================== */
+
+/* --- 1. ANIMACIONES SCROLL REVEAL (60 FPS) --- */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.fade-up {
+  transform: translateY(35px);
+}
+
+.fade-down {
+  transform: translateY(-35px);
+}
+
+.fade-left {
+  transform: translateX(40px);
+}
+
+.fade-right {
+  transform: translateX(-40px);
+}
+
+.zoom-in {
+  transform: scale(0.92);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* --- 2. ACCESIBILIDAD Y FOCO --- */
+:focus-visible {
+  outline: 2px solid #856a36;
+  outline-offset: 4px;
+}
+
+/* --- 3. RESPONSIVE DESIGN: MÓVILES (<= 650px) --- */
+@media (max-width: 650px) {
+  /* Modal de Boleto Móvil */
+  .ticket-modal-overlay {
+    padding: 10px;
+  }
+
+  .ticket-modal-box {
+    padding: 48px 12px 22px;
+    max-height: 94dvh;
+    border-radius: 14px;
+  }
+
+  .ticket-scroll-container {
+    overflow-x: visible;
+    padding: 4px 0 10px;
+  }
+
+  /* Boleto Vertical en Pantallas Chicas */
+  .wedding-ticket {
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .ticket-vip-spine {
+    width: 100%;
+    height: 34px;
+    flex-direction: row;
+    padding: 0 14px;
+    border-right: none;
+    border-bottom: 1.5px solid #d4b475;
+  }
+
+  .spine-vertical-text {
+    position: static;
+    transform: none;
+    font-size: 0.58rem;
+    letter-spacing: 2.5px;
+  }
+
+  .ticket-main-body {
+    margin: 8px;
+    padding: 20px 14px 16px;
+    gap: 14px;
+  }
+
+  .ticket-vector-crest {
+    width: 46px;
+  }
+
+  .ticket-badge-tag {
+    font-size: 0.56rem;
+    letter-spacing: 1.8px;
+  }
+
+  .ticket-couple-names {
+    font-size: clamp(32px, 8.5vw, 42px);
+  }
+
+  .ticket-guest-box {
+    flex-direction: row;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .ticket-guest-name {
+    font-size: 0.95rem;
+  }
+
+  .ticket-venues-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ticket-venue-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .date-bar-text {
+    font-size: 0.5rem;
+    letter-spacing: 0.9px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Perforación Horizontal en Móvil */
+  .ticket-perforation {
+    width: 100%;
+    height: 20px;
+    flex-direction: row;
+    margin: 0;
+  }
+
+  .notch-top {
+    width: 12px;
+    height: 22px;
+    border-radius: 0 12px 12px 0;
+    border: 2px solid #c9a763;
+    border-left: none;
+    margin-top: 0;
+    margin-left: -2px;
+  }
+
+  .notch-bottom {
+    width: 12px;
+    height: 22px;
+    border-radius: 12px 0 0 12px;
+    border: 2px solid #c9a763;
+    border-right: none;
+    margin-bottom: 0;
+    margin-right: -2px;
+  }
+
+  .perf-dots {
+    height: 0;
+    width: auto;
+    border-left: none;
+    border-top: 2px dashed #c49e55;
+    margin: 0 6px;
+  }
+
+  .ticket-stub-body {
+    width: 100%;
+    flex: auto;
+    padding: 20px 16px;
+    gap: 12px;
+    border-left: none;
+  }
+
+  .ticket-modal-actions {
+    flex-direction: column;
+  }
+
+  .ticket-modal-actions button {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  /* Formulario e Invitación */
+  .form-input {
+    font-size: 16px; /* Evita auto-zoom en iOS Safari */
+  }
+
+  .photo-overlay-caption {
+    padding: 45px 20px 28px;
+  }
+
+  .honor-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .parent-name-item {
+    font-size: 15px;
+    letter-spacing: 0.7px;
+  }
+}
+
+/* --- 4. REDUCCIÓN DE MOVIMIENTO (ACCESIBILIDAD) --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
