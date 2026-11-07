@@ -53,24 +53,6 @@ function initScrollReveal() {
   }
 }
 
-// Agregar al Calendario (Google Calendar)
-function initCalendar() {
-  const calendarBtn = document.getElementById('addToCalendarBtn');
-  if (!calendarBtn) return;
-
-  calendarBtn.addEventListener('click', () => {
-    const title = encodeURIComponent("Boda Alexis & Estefanía");
-    const details = encodeURIComponent(
-      "¡Acompáñanos a celebrar nuestro matrimonio!\n\n17:00 hrs: Ceremonia en Parroquia Inmaculada Concepción\n18:00 hrs: Recepción en Casino El Campesino"
-    );
-    const location = encodeURIComponent("Parroquia Inmaculada Concepción & Casino El Campesino");
-    const dates = "20261226T230000Z/20261227T080000Z";
-
-    const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
-    window.open(googleCalUrl, '_blank');
-  });
-}
-
 // Copiar número de evento de Liverpool
 function initCopyLiverpool() {
   const copyLiverpoolBtn = document.getElementById('copyLiverpoolBtn');

@@ -222,6 +222,7 @@
 
 /* Cuenta Regresiva (Glassmorphism) */
 .countdown-section {
+  padding: 44px 20px;
   background: 
     radial-gradient(circle at 10% 20%, rgba(212, 179, 111, 0.14) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(92, 111, 86, 0.12) 0%, transparent 45%),
@@ -233,7 +234,7 @@
 
 .botanical-header {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 24px;
 }
 
 .botanical-accent-garland {
@@ -359,3 +360,7 @@
   border-color: var(--olive-dark);
   transform: translateY(-2px);
 }
+
+.calendar-alternatives { margin-top:14px; font-size:12px; line-height:1.8; color:var(--olive-dark); }
+.calendar-alternatives a { color:inherit; text-underline-offset:3px; }
+.liverpool-logo { display:block; width:183px; max-width:100%; height:auto; margin:0 auto; }

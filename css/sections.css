@@ -27,14 +27,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%;
-  transform-origin: center center;
+  object-position: 63% 20%;
+  transform-origin: 63% 20%;
   animation: heroKenBurnsMobile 25s infinite alternate ease-in-out;
 }
 
 @keyframes heroKenBurnsMobile {
   0% { transform: scale(1); }
-  100% { transform: scale(1.03); }
+  100% { transform: scale(1.02); }
 }
 
 @media (min-width: 900px) {
@@ -221,7 +221,7 @@
   padding: 60px 20px 40px;
   position: relative;
   isolation: isolate;
-  background: #faf8f5;
+  background: #e9e4d9;
 }
 
 .family-honor-section::before {
@@ -229,7 +229,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(#faf8f5, rgba(250, 248, 245, 0.86) 20%, rgba(250, 248, 245, 0.91) 80%, #faf8f5), url('img/abrazo_playa.jpg') center/cover;
+  background: linear-gradient(#e9e4d9, rgba(233, 228, 217, 0.86) 20%, rgba(233, 228, 217, 0.91) 80%, #e9e4d9), url('../img/abrazo_playa.jpg') center/cover;
 }
 
 .honor-frame {
@@ -527,7 +527,7 @@
 }
 
 .card-media-banner {
-  height: 140px;
+  height: clamp(190px, 42vw, 260px);
   position: relative;
   z-index: 1;
   background-size: cover;
@@ -535,12 +535,13 @@
 }
 
 .ceremony-banner {
-  background-image: linear-gradient(rgba(30, 38, 28, 0.35), rgba(25, 33, 23, 0.8)), url('img/parroquia.png');
+  background-position: center 38%;
+  background-image: linear-gradient(rgba(30, 38, 28, 0.08), rgba(25, 33, 23, 0.28)), url('../img/parroquia.png');
   background-color: var(--olive-dark);
 }
 
 .reception-banner {
-  background-image: linear-gradient(rgba(196, 158, 85, 0.4), rgba(45, 56, 43, 0.8)), url('assets/bottom_garland.png');
+  background-image: linear-gradient(rgba(30, 38, 28, 0.08), rgba(25, 33, 23, 0.28)), url('../img/Recepci%C3%B3n%20nupcial.png');
   background-color: var(--olive-dark);
 }
 

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Alexis y Estefania//Boda//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:boda-20261226@alexisyestefania.up.railway.app
+DTSTAMP:20261107T211134Z
+DTSTART:20261227T000000Z
+DTEND:20261227T070000Z
+SUMMARY:Boda Alexis & Estefanía
+LOCATION:Parroquia Inmaculada Concepción y Casino El Campesino\, Tepic\, P
+ uga\, Nayarit
+DESCRIPTION:Ceremonia: 5:00 p. m. en Parroquia Inmaculada Concepción.\nRec
+ epción: 6:00 p. m. en Casino El Campesino.
+URL:https://alexisyestefania.up.railway.app/
+END:VEVENT
+END:VCALENDAR

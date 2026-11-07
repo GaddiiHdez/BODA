@@ -42,6 +42,8 @@
 
 /* --- 3. RESPONSIVE DESIGN: MÓVILES (<= 650px) --- */
 @media (max-width: 650px) {
+  /* Keep scroll reveals inside the narrow viewport before they become visible. */
+  .fade-left, .fade-right { transform: translateY(35px); }
   /* Modal de Boleto Móvil */
   .ticket-modal-overlay {
     padding: 10px;
@@ -180,13 +182,83 @@
     min-height: 48px;
   }
 
+  /* Imagen Principal Hero: Pareja completa y centrada en móviles */
+  .hero-bg-img {
+    object-position: 63% 20%;
+    transform-origin: 63% 20%;
+  }
+
+  /* Carrusel Cuadrado en Móvil (1:1 Aspect Ratio) para lucir a la pareja sin recortes */
+  .gallery-feature-section {
+    padding: 30px 16px;
+  }
+
+  .editorial-gallery-grid {
+    border-radius: 20px;
+  }
+
+  .editorial-photo-card {
+    border-radius: 20px;
+  }
+
+  .photo-container {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .editorial-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Centrado fotográfico dedicado para cada toma */
+  .editorial-photo-card:nth-child(1) .editorial-img {
+    object-position: 36% 30%;
+  }
+
+  .editorial-photo-card:nth-child(2) .editorial-img {
+    object-position: center 30%;
+  }
+
+  .editorial-photo-card:nth-child(3) .editorial-img {
+    object-position: 46% 22%;
+  }
+
+  /* Capa de texto elegante y compacta para no tapar a la pareja */
+  .photo-overlay-caption {
+    padding: 24px 16px 14px;
+    background: linear-gradient(
+      to top,
+      rgba(16, 20, 15, 0.92) 0%,
+      rgba(16, 20, 15, 0.55) 45%,
+      rgba(16, 20, 15, 0) 100%
+    );
+  }
+
+  .caption-tag {
+    font-size: 0.62rem;
+    letter-spacing: 2.8px;
+    margin-bottom: 3px;
+  }
+
+  .caption-title {
+    font-size: 0.88rem;
+    line-height: 1.32;
+    margin: 0 auto 5px;
+    max-width: 95%;
+  }
+
+  .caption-names {
+    font-size: 1.45rem;
+    line-height: 1.1;
+  }
+
   /* Formulario e Invitación */
   .form-input {
     font-size: 16px; /* Evita auto-zoom en iOS Safari */
-  }
-
-  .photo-overlay-caption {
-    padding: 45px 20px 28px;
   }
 
   .honor-eyebrow {

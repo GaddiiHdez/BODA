@@ -4,7 +4,7 @@
 ======================================================== */
 
 function initCountdown() {
-  const WEDDING_TIMESTAMP = new Date(2026, 11, 26, 17, 0, 0).getTime();
+  const WEDDING_TIMESTAMP = new Date("2026-12-26T17:00:00-07:00").getTime();
 
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
