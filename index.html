@@ -2,132 +2,412 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación de Boda - Alexis & Estefanía</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Boda Alexis & Estefanía · 26 de Diciembre de 2026</title>
+  
+  <!-- OpenGraph / Metadatos para compartir en WhatsApp y Redes -->
+  <meta property="og:title" content="Nuestra Boda · Alexis & Estefanía">
+  <meta property="og:description" content="Nos casamos el 26 de Diciembre de 2026. ¡Acompáñanos a celebrar este gran día!">
+  <meta property="og:image" content="img/hero_optimized.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Tipografías de Alta Gama -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ================= BARRA SUPERIOR WEB ================= -->
-  <nav class="web-toolbar no-print">
-    <a href="Invitacion_Alexis_y_Estefania.pdf" download="Invitacion_Alexis_y_Estefania.pdf" class="action-pill primary-pill" style="text-decoration: none;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      <span>Descargar PDF de Imprenta</span>
-    </a>
-    <button id="printBtn" class="action-pill">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
-      <span>Imprimir</span>
+  <!-- ================= REPRODUCTOR FLOTANTE DE AUDIO ================= -->
+  <div class="music-pill-widget" id="musicWidget">
+    <button class="music-btn" id="musicToggleBtn" aria-label="Reproducir o pausar música">
+      <div class="sound-bars">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+        <span class="bar bar-4"></span>
+      </div>
+      <span class="music-label" id="musicLabel">Nuestra Canción</span>
     </button>
-    <button id="musicToggle" class="action-pill icon-pill" title="Música ambiental">
-      <span id="musicIcon">🎵</span>
-    </button>
-  </nav>
+  </div>
 
-  <!-- Audio de fondo opcional -->
-  <audio id="bgMusic" loop preload="none">
+  <audio id="weddingAudio" loop preload="none">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mp3">
   </audio>
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <main class="invitation-wrapper">
+  <!-- ================= HERO SECTION CINEMÁTICO ================= -->
+  <header class="hero-section">
+    <div class="hero-bg-wrapper">
+      <img src="img/hero_optimized.jpg" alt="Alexis y Estefanía" class="hero-bg-img" id="heroImage">
+      <div class="hero-overlay"></div>
+      <div class="hero-vignette"></div>
+    </div>
 
-    <!-- ========================================================
-         CARA 1: DISEÑO OFICIAL DE CANVA (Arte de Alta Resolución)
-    ======================================================== -->
-    <article class="invitation-card canva-art-card">
-      <img src="assets/invitacion_canva.png" alt="Invitación de Boda Alexis y Estefanía" class="canva-full-art" />
-    </article>
+    <!-- Efecto sutil de destellos dorados -->
+    <div class="sparkles-container" id="sparkles"></div>
 
-    <!-- ========================================================
-         CARA 2: EXPERIENCIA DIGITAL INTERACTIVA (Contador, Mapas, RSVP)
-    ======================================================== -->
-    <article class="invitation-card details-card no-print">
-      <div class="card-border-frame">
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal fade-down">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">NUESTRA BODA</span>
+        <span class="eyebrow-line"></span>
+      </div>
 
-        <header class="floral-hero-header header-garland-subtle">
-          <img src="assets/bottom_garland.png" alt="Detalle botánico" class="garland-top-img" />
-        </header>
+      <h1 class="hero-names reveal zoom-in">
+        <span class="name-part">Alexis</span>
+        <span class="name-ampersand">&amp;</span>
+        <span class="name-part">Estefanía</span>
+      </h1>
 
-        <section class="card-content-body details-body">
-          <h2 class="section-script-title">Detalles & Ubicación</h2>
+      <p class="hero-quote reveal fade-up">
+        "El amor no se mira, se siente, y aún más cuando compartimos nuestro camino contigo."
+      </p>
+
+      <div class="hero-date-badge reveal fade-up">
+        <span class="date-tag">SÁBADO</span>
+        <span class="date-num">26</span>
+        <span class="date-month">DICIEMBRE · 2026</span>
+      </div>
+
+      <a href="#ceremony" class="scroll-indicator" aria-label="Desplazar hacia abajo">
+        <span class="scroll-text">Descubre los detalles</span>
+        <div class="scroll-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= CUENTA REGRESIVA INTERACTIVA ================= -->
+  <section class="section countdown-section" id="countdown-sec">
+    <div class="section-container">
+      
+      <div class="botanical-header reveal fade-up">
+        <img src="assets/bottom_garland.png" alt="Decoración botánica" class="botanical-accent-garland">
+        <h2 class="section-script-title">Esperando el Gran Día</h2>
+        <p class="section-tagline">CADA SEGUNDO CUENTA PARA COMENZAR NUESTRA HISTORIA JUNTOS</p>
+      </div>
+
+      <div class="countdown-grid reveal fade-up">
+        <div class="countdown-card">
+          <div class="card-glass">
+            <span class="countdown-value" id="days">00</span>
+            <span class="countdown-unit">Días</span>
+          </div>
+        </div>
+        <div class="countdown-colon">:</div>
+        <div class="countdown-card">
+          <div class="card-glass">
+            <span class="countdown-value" id="hours">00</span>
+            <span class="countdown-unit">Horas</span>
+          </div>
+        </div>
+        <div class="countdown-colon">:</div>
+        <div class="countdown-card">
+          <div class="card-glass">
+            <span class="countdown-value" id="minutes">00</span>
+            <span class="countdown-unit">Min</span>
+          </div>
+        </div>
+        <div class="countdown-colon">:</div>
+        <div class="countdown-card">
+          <div class="card-glass">
+            <span class="countdown-value" id="seconds">00</span>
+            <span class="countdown-unit">Seg</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de agendar en calendario -->
+      <div class="calendar-action reveal fade-up">
+        <button id="addToCalendarBtn" class="btn btn-outline-gold">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Agregar a mi Calendario (Google / Apple)</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PADRINOS DE HONOR ================= -->
+  <section class="section padrinos-section">
+    <div class="section-container">
+      <div class="padrinos-frame reveal fade-up">
+        <div class="frame-inner">
+          <span class="mini-leaf-icon">🌿</span>
+          <p class="padrinos-subtitle">CON LA BENDICIÓN DE DIOS Y NUESTROS</p>
+          <h3 class="padrinos-title">Padrinos de Boda</h3>
           
-          <div class="gold-ornament-line">
-            <span class="line-side"></span>
-            <span class="symbol">✦ ✦ ✦</span>
-            <span class="line-side"></span>
-          </div>
-
-          <!-- Cuenta regresiva interactiva -->
-          <div class="countdown-container" style="margin-top: 0; margin-bottom: 24px;">
-            <p class="countdown-eyebrow">CUENTA REGRESIVA PARA EL 26 DE DICIEMBRE</p>
-            <div class="countdown-timer" id="countdown">
-              <div class="timer-unit"><span id="days">00</span><small>DÍAS</small></div>
-              <div class="timer-separator">:</div>
-              <div class="timer-unit"><span id="hours">00</span><small>HORAS</small></div>
-              <div class="timer-separator">:</div>
-              <div class="timer-unit"><span id="minutes">00</span><small>MIN</small></div>
-              <div class="timer-separator">:</div>
-              <div class="timer-unit"><span id="seconds">00</span><small>SEG</small></div>
+          <div class="padrinos-names-block">
+            <div class="padrino-item">
+              <span class="padrino-name">Esmeralda Ortega Delgado</span>
+            </div>
+            <div class="padrinos-ampersand">&amp;</div>
+            <div class="padrino-item">
+              <span class="padrino-name">Pedro Guillén Guzmán</span>
             </div>
           </div>
 
-          <!-- Itinerario con enlaces a Google Maps -->
-          <div class="itinerary-grid">
-            <div class="itinerary-item">
-              <span class="itinerary-badge">5:00 PM</span>
-              <h3 class="itinerary-name">Ceremonia Religiosa</h3>
-              <p class="itinerary-place">Parroquia Inmaculada Concepción</p>
-              <a href="https://maps.google.com/?q=Parroquia+Inmaculada+Concepcion" target="_blank" class="geo-btn" style="margin-top: 8px;">
-                📍 Ver ubicación en Google Maps
+          <p class="padrinos-dedication">
+            Gracias por guiarnos, apoyarnos y ser testigos de honor en el día más importante de nuestras vidas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ITINERARIO & LUGARES ================= -->
+  <section class="section itinerary-section" id="ceremony">
+    <div class="section-container">
+      
+      <div class="section-head reveal fade-up">
+        <p class="section-eyebrow">DÓNDE &amp; CUÁNDO</p>
+        <h2 class="section-script-title">Itinerario de Celebración</h2>
+        <div class="gold-divider">
+          <span class="line"></span>
+          <span class="ornament">✦ ✦ ✦</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="timeline-container">
+        
+        <!-- EVENTO 1: CEREMONIA -->
+        <article class="timeline-card reveal fade-right">
+          <div class="card-media-banner ceremony-banner">
+            <div class="badge-time">5:00 PM</div>
+          </div>
+          <div class="card-body">
+            <div class="card-icon-circle">⛪</div>
+            <span class="event-type">CEREMONIA RELIGIOSA</span>
+            <h3 class="event-title">Parroquia Inmaculada Concepción</h3>
+            <p class="event-desc">
+              Acompáñanos a consagrar nuestro matrimonio en una misa llena de fe y alegría.
+            </p>
+            <div class="event-actions">
+              <a href="https://maps.google.com/?q=Parroquia+Inmaculada+Concepcion" target="_blank" class="btn btn-gold">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                <span>Google Maps</span>
               </a>
-            </div>
-
-            <div class="itinerary-item">
-              <span class="itinerary-badge">6:00 PM</span>
-              <h3 class="itinerary-name">Recepción & Celebración</h3>
-              <p class="itinerary-place">Casino El Campesino</p>
-              <a href="https://maps.google.com/?q=Casino+El+Campesino" target="_blank" class="geo-btn" style="margin-top: 8px;">
-                📍 Ver ubicación en Google Maps
-              </a>
-            </div>
-          </div>
-
-          <!-- Padrinos de Boda -->
-          <div class="etiquette-box">
-            <h4 class="etiquette-title">PADRINOS DE BODA</h4>
-            <p class="etiquette-text">Esmeralda Ortega Delgado</p>
-            <p class="etiquette-text">&amp; Pedro Guillén Guzmán</p>
-          </div>
-
-          <!-- Módulo RSVP -->
-          <div class="rsvp-lux-box">
-            <h3 class="rsvp-title">Confirmación de Asistencia</h3>
-            <p class="rsvp-subtitle">Tu presencia hará inolvidable este día. Favor de confirmar tu asistencia por WhatsApp.</p>
-            
-            <div class="rsvp-action">
-              <a href="https://wa.me/521234567890?text=¡Hola!%20Confirmo%20con%20mucha%20alegría%20mi%20asistencia%20a%20la%20boda%20de%20Alexis%20y%20Estefanía%20el%2026%20de%20diciembre." target="_blank" class="whatsapp-lux-btn">
-                <span>Confirmar por WhatsApp</span>
-                <span class="arrow-right">→</span>
+              <a href="https://waze.com/ul?q=Parroquia+Inmaculada+Concepcion" target="_blank" class="btn btn-secondary-soft">
+                <span>Waze</span>
               </a>
             </div>
           </div>
+        </article>
 
-          <footer class="closing-phrase">
-            ¡Te esperamos para celebrar juntos!
-          </footer>
-        </section>
-
-        <footer class="floral-hero-footer">
-          <img src="assets/bottom_garland.png" alt="Guirnalda botánica" class="garland-footer-img" />
-        </footer>
+        <!-- EVENTO 2: RECEPCIÓN -->
+        <article class="timeline-card reveal fade-left">
+          <div class="card-media-banner reception-banner">
+            <div class="badge-time">6:00 PM</div>
+          </div>
+          <div class="card-body">
+            <div class="card-icon-circle">🥂</div>
+            <span class="event-type">RECEPCIÓN &amp; FIESTA</span>
+            <h3 class="event-title">Casino El Campesino</h3>
+            <p class="event-desc">
+              Cena, brindis, música y baile para celebrar el inicio de esta nueva etapa juntos.
+            </p>
+            <div class="event-actions">
+              <a href="https://maps.google.com/?q=Casino+El+Campesino" target="_blank" class="btn btn-gold">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                <span>Google Maps</span>
+              </a>
+              <a href="https://waze.com/ul?q=Casino+El+Campesino" target="_blank" class="btn btn-secondary-soft">
+                <span>Waze</span>
+              </a>
+            </div>
+          </div>
+        </article>
 
       </div>
-    </article>
 
-  </main>
+    </div>
+  </section>
+
+  <!-- ================= FOTOGRAFÍA EDITORIAL & HISTORIA ================= -->
+  <section class="section gallery-feature-section">
+    <div class="section-container">
+      <div class="editorial-photo-card reveal zoom-in">
+        <div class="photo-container">
+          <img src="img/hero_optimized.jpg" alt="Alexis y Estefanía" class="editorial-img">
+          <div class="photo-overlay-caption">
+            <p class="caption-tag">NUESTRA HISTORIA</p>
+            <h3 class="caption-title">"El destino nos unió, pero el amor nos mantendrá juntos por siempre."</h3>
+            <span class="caption-names">Alexis &amp; Estefanía</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CÓDIGO DE VESTIMENTA ================= -->
+  <section class="section dresscode-section">
+    <div class="section-container">
+      <div class="dresscode-box reveal fade-up">
+        <span class="dresscode-icon">👔 👗</span>
+        <p class="section-eyebrow">DRESS CODE</p>
+        <h3 class="dresscode-main-title">Rigurosa Etiqueta / Formal</h3>
+        <p class="dresscode-desc">
+          Queremos que luzcas espectacular. Te invitamos a vestir de gala en tonos elegantes.
+        </p>
+        
+        <div class="palette-wrapper">
+          <p class="palette-title">Paleta de Colores Sugerida</p>
+          <div class="color-swatches">
+            <div class="swatch" style="background: #3f4e3c;" title="Verde Olivo Profundo"><span>Olivo</span></div>
+            <div class="swatch" style="background: #8e9e87;" title="Verde Salvia"><span>Salvia</span></div>
+            <div class="swatch" style="background: #c4a96b;" title="Dorado Cálido"><span>Dorado</span></div>
+            <div class="swatch" style="background: #2b303a;" title="Azul Marino / Medianoche"><span>Marino</span></div>
+            <div class="swatch" style="background: #1a1a1a;" title="Negro Clásico"><span>Negro</span></div>
+          </div>
+        </div>
+
+        <div class="bride-courtesy-note">
+          <span class="sparkle-star">✦</span>
+          <span>Agradecemos con cariño reservar los tonos <strong>blanco, perla y marfil</strong> exclusivamente para la novia.</span>
+          <span class="sparkle-star">✦</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MESA DE REGALOS / LLUVIA DE SOBRES ================= -->
+  <section class="section gifts-section">
+    <div class="section-container">
+      <div class="gifts-card reveal fade-up">
+        <div class="gifts-icon">✉️ 🎁</div>
+        <p class="section-eyebrow">DETALLES &amp; PRESENTES</p>
+        <h3 class="gifts-title">Lluvia de Sobres &amp; Regalos</h3>
+        <p class="gifts-description">
+          El mejor regalo es tu presencia y bendición en nuestro matrimonio. Sin embargo, si deseas hacernos un presente, te agradeceremos una muestra de cariño en nuestra <strong>Lluvia de Sobres</strong> el día del evento, o vía transferencia.
+        </p>
+
+        <button class="btn btn-outline-gold toggle-bank-btn" id="toggleBankBtn">
+          <span>Ver Datos Bancarios</span>
+          <span class="arrow">↓</span>
+        </button>
+
+        <div class="bank-details-collapse" id="bankDetails">
+          <div class="bank-info-box">
+            <div class="bank-row">
+              <span class="bank-label">Banco:</span>
+              <strong class="bank-val">BBVA</strong>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">Beneficiario:</span>
+              <strong class="bank-val">Alexis &amp; Estefanía</strong>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">Cuenta CLABE:</span>
+              <div class="clabe-wrapper">
+                <code class="bank-val clabe-code" id="clabeCode">012345678901234567</code>
+                <button class="copy-btn" id="copyClabeBtn" title="Copiar CLABE">Copiar</button>
+              </div>
+            </div>
+            <span class="copy-feedback" id="copyFeedback">¡CLABE copiada al portapapeles!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RSVP INTERACTIVO INTELIGENTE ================= -->
+  <section class="section rsvp-interactive-section" id="rsvp">
+    <div class="section-container">
+      
+      <div class="rsvp-card-lux reveal fade-up">
+        <div class="botanical-top-crown">
+          <img src="assets/header_crown.png" alt="Corona floral" class="crown-img">
+        </div>
+
+        <div class="rsvp-content">
+          <p class="section-eyebrow">CONFIRMACIÓN DE ASISTENCIA</p>
+          <h2 class="section-script-title">¿Nos Acompañas?</h2>
+          <p class="rsvp-instructions">
+            Para nosotros es fundamental contar con tu presencia. Por favor confírmanos antes del <strong>1 de Diciembre de 2026</strong>.
+          </p>
+
+          <form id="rsvpForm" class="rsvp-form" onsubmit="return false;">
+            
+            <div class="form-group">
+              <label for="guestName">Nombre Completo del Invitado o Familia:</label>
+              <input type="text" id="guestName" class="form-input" placeholder="Ej. Familia Hernández / Carlos Gómez" required>
+            </div>
+
+            <div class="form-group">
+              <label>¿Podrás asistir?:</label>
+              <div class="radio-pills">
+                <label class="radio-pill active" id="pillSi">
+                  <input type="radio" name="attendance" value="si" checked>
+                  <span>¡Sí, con mucho gusto asistiré! 🎉</span>
+                </label>
+                <label class="radio-pill" id="pillNo">
+                  <input type="radio" name="attendance" value="no">
+                  <span>No podré asistir, pero les deseo lo mejor ❤️</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" id="guestCountGroup">
+              <label for="guestCount">Número de Pases a Confirmar:</label>
+              <select id="guestCount" class="form-input form-select">
+                <option value="1">1 Persona</option>
+                <option value="2" selected>2 Personas</option>
+                <option value="3">3 Personas</option>
+                <option value="4">4 Personas</option>
+                <option value="5+">5 o más Personas</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="guestMessage">Mensaje con buenos deseos para los novios (opcional):</label>
+              <textarea id="guestMessage" class="form-input form-textarea" rows="3" placeholder="¡Muchísimas felicidades en esta nueva etapa!..."></textarea>
+            </div>
+
+            <button type="button" id="sendRsvpWhatsApp" class="btn btn-whatsapp-giant">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+              <span>Confirmar vía WhatsApp</span>
+            </button>
+          </form>
+
+          <!-- Descarga de la tarjeta en PDF oficial de Canva -->
+          <div class="pdf-download-footer">
+            <p>¿Deseas guardar o imprimir la versión oficial en PDF?</p>
+            <a href="Invitacion_Alexis_y_Estefania.pdf" download="Invitacion_Alexis_y_Estefania.pdf" class="btn btn-secondary-soft">
+              📄 Descargar Invitación en PDF
+            </a>
+          </div>
+
+        </div>
+
+        <div class="botanical-bottom-garland">
+          <img src="assets/bottom_garland.png" alt="Guirnalda floral" class="garland-img">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PIE DE PÁGINA ================= -->
+  <footer class="wedding-footer">
+    <div class="section-container">
+      <h3 class="footer-names">Alexis &amp; Estefanía</h3>
+      <p class="footer-date">26 · DICIEMBRE · 2026</p>
+      <p class="footer-love">"El amor es paciente, es bondadoso. El amor jamás se extingue."</p>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
