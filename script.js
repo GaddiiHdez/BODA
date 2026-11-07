@@ -166,8 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // CONFIGURACIÓN PERSONALIZABLE
   // ==========================================
-  // Enlace a la carpeta de Google Drive donde los invitados subirán sus fotos
+  // 1. Enlace a la carpeta de Google Drive donde los invitados subirán sus fotos
   const GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1BodaAlexisEstefaniaDriveFolder?usp=sharing";
+
+  // 2. URL de Google Apps Script para guardar confirmaciones en Google Sheets en tiempo real
+  // (Pega aquí la URL de tu Web App cuando crees el script en tu hoja de cálculo)
+  const GOOGLE_SHEETS_SCRIPT_URL = "";
 
   // Actualizar enlace y QR automáticamente
   const driveUploadBtn = document.getElementById('driveUploadBtn');
@@ -291,8 +295,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Referencias del Modal de Boleto
+  const ticketModal = document.getElementById('ticketModal');
+  const closeTicketModal = document.getElementById('closeTicketModal');
+  const ticketGuestName = document.getElementById('ticketGuestName');
+  const ticketPassesQty = document.getElementById('ticketPassesQty');
+  const ticketCodeDisplay = document.getElementById('ticketCodeDisplay');
+  const ticketQrImage = document.getElementById('ticketQrImage');
+  const downloadTicketPdfBtn = document.getElementById('downloadTicketPdfBtn');
+  const ticketWhatsAppBtn = document.getElementById('ticketWhatsAppBtn');
+
+  // Cerrar modal
+  if (closeTicketModal && ticketModal) {
+    closeTicketModal.addEventListener('click', () => {
+      ticketModal.classList.remove('open');
+    });
+    ticketModal.addEventListener('click', (e) => {
+      if (e.target === ticketModal) {
+        ticketModal.classList.remove('open');
+      }
+    });
+  }
+
+  // Generador de código aleatorio único de pase
+  function generateTicketCode() {
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    return `AE-2612-${randomDigits}`;
+  }
+
+  // Enviar a Google Sheets en tiempo real
+  async function saveToGoogleSheets(record) {
+    if (!GOOGLE_SHEETS_SCRIPT_URL) return;
+    try {
+      await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+      console.log('Registro enviado a Google Sheets');
+    } catch (err) {
+      console.warn('Nota sobre Google Sheets (no interrumpe el pase):', err);
+    }
+  }
+
   if (sendRsvpBtn) {
-    sendRsvpBtn.addEventListener('click', () => {
+    sendRsvpBtn.addEventListener('click', async () => {
       const guestNameInput = document.getElementById('guestName');
       const guestName = guestNameInput ? guestNameInput.value.trim() : '';
       
@@ -305,13 +353,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const attendance = document.querySelector('input[name="attendance"]:checked')?.value || 'si';
       const guestCount = document.getElementById('guestCount')?.value || '1';
       const guestMessage = document.getElementById('guestMessage')?.value.trim() || '';
+      const ticketCode = generateTicketCode();
 
+      // Guardar en Google Sheets en segundo plano
+      saveToGoogleSheets({
+        timestamp: new Date().toLocaleString('es-MX'),
+        guestName: guestName,
+        attendance: attendance === 'si' ? 'Confirmado' : 'Declinado',
+        guestCount: attendance === 'si' ? guestCount : '0',
+        guestMessage: guestMessage,
+        ticketCode: attendance === 'si' ? ticketCode : 'N/A'
+      });
+
+      // Preparar mensaje para WhatsApp
       let text = `¡Hola Alexis y Estefanía! 💍✨\n\n`;
 
       if (attendance === 'si') {
         text += `Confirmo con mucha alegría mi asistencia a su boda el *26 de Diciembre de 2026*.\n\n`;
         text += `👤 *Invitado / Familia:* ${guestName}\n`;
         text += `🎟️ *Pases Confirmados:* ${guestCount} persona(s)\n`;
+        text += `🏷️ *Código de Boleto:* ${ticketCode}\n`;
       } else {
         text += `Muchísimas gracias por la invitación a su boda. Lamentablemente no podré asistir, pero les envío todo mi cariño y bendiciones en esta maravillosa etapa. ❤️\n\n`;
         text += `👤 *De parte de:* ${guestName}\n`;
@@ -323,11 +384,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
       text += `\n¡Felicidades por su matrimonio! 🥂🌿`;
 
-      // Enlace para WhatsApp (número predeterminado o selector directo de contacto)
       const encodedText = encodeURIComponent(text);
       const whatsappUrl = `https://wa.me/?text=${encodedText}`;
 
-      window.open(whatsappUrl, '_blank');
+      // Si confirma que SÍ asiste, mostrar el boleto de gala en pantalla
+      if (attendance === 'si') {
+        if (ticketGuestName) ticketGuestName.textContent = guestName;
+        if (ticketPassesQty) ticketPassesQty.textContent = guestCount;
+        if (ticketCodeDisplay) ticketCodeDisplay.textContent = ticketCode;
+        if (ticketQrImage) {
+          const qrPayload = encodeURIComponent(`PASE BODA ALEXIS & ESTEFANIA\nInvitado: ${guestName}\nPases: ${guestCount}\nCodigo: ${ticketCode}`);
+          ticketQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=2d382b&bgcolor=ffffff&data=${qrPayload}`;
+        }
+
+        // Configurar botón de WhatsApp dentro del modal
+        if (ticketWhatsAppBtn) {
+          ticketWhatsAppBtn.onclick = () => window.open(whatsappUrl, '_blank');
+        }
+
+        // Configurar descarga de PDF del boleto
+        if (downloadTicketPdfBtn) {
+          downloadTicketPdfBtn.onclick = () => {
+            const ticketElement = document.getElementById('weddingTicket');
+            if (typeof html2pdf !== 'undefined' && ticketElement) {
+              const cleanFileName = `Pase_Boda_Alexis_y_Estefania_${guestName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+              const opt = {
+                margin: [10, 10, 10, 10],
+                filename: cleanFileName,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2.5, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: [210, 95], orientation: 'landscape' }
+              };
+              html2pdf().set(opt).from(ticketElement).save();
+            } else {
+              window.print();
+            }
+          };
+        }
+
+        // Abrir el modal del boleto
+        if (ticketModal) {
+          ticketModal.classList.add('open');
+        }
+      } else {
+        // Si declina amablemente, abrir WhatsApp de inmediato
+        window.open(whatsappUrl, '_blank');
+      }
     });
   }
 
