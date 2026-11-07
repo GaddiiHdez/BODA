@@ -1857,278 +1857,401 @@ body {
 }
 
 /* ========================================================
-   DISEÑO DEL BOLETO DE GALA (FLAT DESIGN & ILUSTRACIONES VECTORIALES)
+   DISEÑO DEL BOLETO DE GALA IMPERIAL (ROYAL OPERA VIP PASS)
 ======================================================== */
 .wedding-ticket {
-  width: 740px;
-  min-width: 740px;
-  height: 300px;
+  width: 780px;
+  min-width: 780px;
+  min-height: 330px;
   margin: 0 auto;
   display: flex;
-  background: #fffefb;
-  border: 2px solid #c9b99f;
-  border-radius: 14px;
+  background: #faf6ee;
+  border: 2px solid #c49e55;
+  border-radius: 10px;
   position: relative;
-  box-shadow: 0 15px 45px rgba(35, 45, 33, 0.12);
+  box-shadow: 0 22px 60px rgba(24, 31, 23, 0.25);
   text-align: left;
   box-sizing: border-box;
   overflow: hidden;
 }
 
-/* Cuerpo principal */
+/* 1. Franja Lateral Izquierda Imperial */
+.ticket-vip-spine {
+  width: 44px;
+  background: #1e261c;
+  border-right: 2px solid #c49e55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  color: #e5c882;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.spine-star {
+  font-size: 0.75rem;
+  color: #c49e55;
+  line-height: 1;
+}
+
+.spine-vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-title);
+  font-size: 0.62rem;
+  letter-spacing: 3.5px;
+  font-weight: 600;
+  color: #e5c882;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* 2. Cuerpo Principal en Papel Algodón Marfil */
 .ticket-main-body {
   flex: 1;
-  padding: 16px 22px 14px;
+  min-width: 0;
+  padding: 20px 26px 18px;
+  margin: 10px 4px 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 12px;
   position: relative;
-  border: 1px solid rgba(196, 158, 85, 0.45);
-  margin: 8px 0 8px 8px;
-  border-radius: 8px;
-  background: #fffefb;
+  background: #fffdf9;
+  border: 1.5px solid #d4b87a;
+  box-shadow: inset 0 0 0 4px #fffdf9, inset 0 0 0 5px rgba(196, 158, 85, 0.35);
 }
 
-/* Esquinas botánicas flat design (estilo ilustrador) */
-.ticket-corner-vector {
+/* Marca de agua botánica central */
+.ticket-watermark-svg {
   position: absolute;
-  width: 44px;
-  height: 44px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 230px;
   pointer-events: none;
-  z-index: 1;
-  opacity: 0.85;
+  z-index: 0;
 }
 
-.corner-tl { top: 4px; left: 4px; }
-.corner-tr { top: 4px; right: 4px; transform: scaleX(-1); }
-.corner-bl { bottom: 4px; left: 4px; transform: scaleY(-1); }
-.corner-br { bottom: 4px; right: 4px; transform: scale(-1); }
+/* Esquinas ornamentales Cartier / Fine Art */
+.ticket-corner-ornament {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+  z-index: 2;
+}
 
+.corner-tl { top: 6px; left: 6px; }
+.corner-tr { top: 6px; right: 6px; }
+.corner-bl { bottom: 6px; left: 6px; }
+.corner-br { bottom: 6px; right: 6px; }
+
+/* Encabezado con guirnaldas simétricas */
 .ticket-top-brand {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ede5d7;
-  padding-bottom: 4px;
   position: relative;
   z-index: 2;
+  text-align: center;
+  border-bottom: 1px solid #eadec9;
+  padding-bottom: 8px;
+}
+
+.ticket-crest-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ticket-vector-crest {
+  width: 85px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 .ticket-badge-tag {
   font-family: var(--font-title);
-  font-size: 0.6rem;
-  letter-spacing: 2.2px;
-  color: var(--gold-primary);
-  font-weight: 600;
+  font-size: 0.64rem;
+  letter-spacing: 3px;
+  color: #8c6d32;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.ticket-vector-crest {
-  height: 18px;
-  width: auto;
-  max-width: 220px;
-}
-
+/* Nombres de los novios */
 .ticket-couple {
   text-align: center;
-  margin: 2px 0;
   position: relative;
   z-index: 2;
+  margin: 0;
+}
+
+.ticket-event-pre {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 0.56rem;
+  letter-spacing: 4px;
+  color: #9e7f43;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .ticket-couple-names {
   font-family: var(--font-script);
-  font-size: 2.4rem;
-  color: var(--olive-dark);
-  line-height: 1;
-  margin-bottom: 1px;
-  letter-spacing: 0.5px;
+  font-size: 2.95rem;
+  color: #1e261c;
+  line-height: 1.05;
+  margin: 0;
+  font-weight: 400;
 }
 
-.ticket-event-label {
-  font-family: var(--font-title);
-  font-size: 0.62rem;
-  letter-spacing: 4px;
-  color: var(--gold-primary);
-  font-weight: 600;
+.ticket-amp {
+  color: #c49e55;
+  font-size: 2.3rem;
+  padding: 0 4px;
 }
 
+/* Recuadro de Invitado y Medalla Imperial de Pases */
 .ticket-guest-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #faf7f0;
-  border: 1px solid #e7ddcd;
-  border-radius: 8px;
-  padding: 7px 14px;
+  gap: 14px;
+  background: linear-gradient(90deg, #f8f3e8 0%, #fdfbf6 100%);
+  border: 1px solid #dcc599;
+  border-left: 4px solid #1e261c;
+  border-radius: 6px;
+  padding: 10px 16px;
   position: relative;
   z-index: 2;
+}
+
+.ticket-field-col {
+  min-width: 0;
+  flex: 1;
 }
 
 .field-label-small {
   display: block;
   font-family: var(--font-title);
-  font-size: 0.6rem;
-  color: var(--gold-primary);
-  letter-spacing: 1.5px;
-  font-weight: 600;
+  font-size: 0.56rem;
+  color: #8c6d32;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 3px;
 }
 
 .ticket-guest-name {
+  display: block;
   font-family: var(--font-title);
-  font-size: 1.05rem;
-  color: var(--olive-dark);
+  font-size: 1.12rem;
+  color: #1e261c;
   letter-spacing: 0.8px;
-  font-weight: 600;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
 }
 
-.ticket-passes-badge {
-  text-align: right;
-  border-left: 1px solid #e5dcce;
-  padding-left: 14px;
+.ticket-passes-seal {
+  flex-shrink: 0;
+  background: #1e261c;
+  border: 1.5px solid #c49e55;
+  border-radius: 6px;
+  padding: 6px 14px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(30, 38, 28, 0.15);
+}
+
+.seal-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .ticket-qty-num {
   font-family: var(--font-title);
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  color: var(--gold-primary);
+  color: #e5c882;
   line-height: 1;
-  display: block;
 }
 
 .ticket-qty-label {
-  font-size: 0.56rem;
+  font-family: var(--font-title);
+  font-size: 0.5rem;
   letter-spacing: 1.2px;
-  color: var(--text-muted);
+  color: #ffffff;
   font-weight: 600;
+  line-height: 1.25;
+  text-align: left;
 }
 
+/* Itinerario Arquitectónico */
 .ticket-venues-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  background: #ffffff;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 14px;
+  background: #faf6ed;
+  border: 1px solid #e6d8be;
   border-radius: 6px;
-  padding: 6px 12px;
-  border: 1px solid #f0e8db;
+  padding: 9px 14px;
   position: relative;
   z-index: 2;
+}
+
+.ticket-venue-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.ticket-venue-divider {
+  width: 1px;
+  background: #dcc599;
+  flex-shrink: 0;
 }
 
 .t-venue-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .t-venue-icon {
-  width: 14px;
-  height: 14px;
-  color: var(--gold-primary);
+  width: 15px;
+  height: 15px;
+  color: #b38b3f;
   flex-shrink: 0;
 }
 
 .t-badge {
   font-family: var(--font-title);
   font-size: 0.62rem;
-  letter-spacing: 1.2px;
-  font-weight: 600;
-  color: var(--olive-primary);
+  letter-spacing: 1.4px;
+  font-weight: 700;
+  color: #8c6d32;
 }
 
 .t-name {
-  font-size: 0.78rem;
-  color: var(--text-dark);
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.8rem;
+  color: #1e261c;
+  font-weight: 600;
   display: block;
+  line-height: 1.25;
 }
 
+/* Barra Inferior de Fecha y Sede */
 .ticket-date-bar {
-  text-align: center;
-  border-top: 1px solid #ede5d7;
-  padding-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1e261c;
+  color: #e5c882;
+  border: 1px solid #c49e55;
+  border-radius: 4px;
+  padding: 6px 12px;
   position: relative;
   z-index: 2;
 }
 
-.ticket-date-bar span {
-  font-family: var(--font-title);
+.date-pill-ornament {
+  color: #c49e55;
   font-size: 0.68rem;
-  letter-spacing: 2.8px;
-  color: var(--olive-dark);
+  line-height: 1;
+}
+
+.date-bar-text {
+  font-family: var(--font-title);
+  font-size: 0.62rem;
+  letter-spacing: 2.2px;
+  color: #f7ebd2;
   font-weight: 600;
 }
 
-/* Talón Perforado */
+/* 3. Línea de Corte Troquelada con Muescas Reales */
 .ticket-perforation {
-  width: 22px;
+  width: 26px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin: 8px 0;
-}
-
-.notch {
-  width: 22px;
-  height: 12px;
-  background: #ffffff;
-  position: relative;
+  flex-shrink: 0;
   z-index: 5;
 }
 
+.notch {
+  width: 24px;
+  height: 13px;
+  background: #ffffff;
+  position: relative;
+  z-index: 6;
+}
+
 .notch-top {
-  border-radius: 0 0 12px 12px;
-  border: 2px solid #c9b99f;
+  border-radius: 0 0 14px 14px;
+  border: 2px solid #c49e55;
   border-top: none;
-  margin-top: -10px;
+  margin-top: -2px;
 }
 
 .notch-bottom {
-  border-radius: 12px 12px 0 0;
-  border: 2px solid #c9b99f;
+  border-radius: 14px 14px 0 0;
+  border: 2px solid #c49e55;
   border-bottom: none;
-  margin-bottom: -10px;
+  margin-bottom: -2px;
 }
 
 .perf-dots {
   flex: 1;
-  border-left: 2px dashed #baa88c;
+  border-left: 2px dashed #c49e55;
   width: 0;
-  margin: 3px 0;
+  margin: 4px 0;
+  opacity: 0.85;
 }
 
-/* Talón derecho (Stub) */
+/* 4. Talón Derecho VIP (Verde Bosque Profundo & Oro) */
 .ticket-stub-body {
-  width: 175px;
-  background: #fcf9f2;
-  border: 1px dashed rgba(196, 158, 85, 0.45);
-  border-radius: 8px;
-  margin: 8px 8px 8px 0;
-  padding: 12px 10px;
+  width: 195px;
+  flex: 0 0 195px;
+  background: #1e261c;
+  border-left: 1px solid rgba(196, 158, 85, 0.4);
+  margin: 0;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   text-align: center;
   position: relative;
+  color: #ffffff;
+  box-shadow: inset 0 0 0 6px #1e261c, inset 0 0 0 7px rgba(229, 200, 130, 0.35);
 }
 
-.stub-wreath-wrap {
+.stub-royal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.stub-monogram-seal {
   position: relative;
-  width: 60px;
-  height: 52px;
+  width: 84px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.stub-wreath-svg {
+.stub-seal-svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2137,65 +2260,97 @@ body {
 
 .stub-brand {
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   letter-spacing: 2px;
-  color: var(--gold-primary);
+  color: #e5c882;
   font-weight: 700;
   position: relative;
   z-index: 2;
+  padding-top: 2px;
+}
+
+.stub-vip-sub {
+  font-family: var(--font-title);
+  font-size: 0.5rem;
+  letter-spacing: 2.8px;
+  color: #c49e55;
+  font-weight: 600;
+}
+
+.stub-qr-frame {
+  padding: 4px;
+  border: 1px solid #c49e55;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .stub-qr-box {
   background: #ffffff;
   padding: 6px;
-  border-radius: 8px;
-  border: 1px solid #e3dacd;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  border-radius: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .stub-qr-render-area {
-  width: 86px;
-  height: 86px;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .stub-qr-render-area canvas, .stub-qr-render-area img {
-  width: 86px !important;
-  height: 86px !important;
+  width: 90px !important;
+  height: 90px !important;
   display: block;
 }
 
 .stub-meta {
-  margin: 2px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
 }
 
 .stub-label {
   display: block;
   font-family: var(--font-title);
-  font-size: 0.56rem;
-  color: var(--gold-primary);
-  letter-spacing: 1.5px;
+  font-size: 0.5rem;
+  color: #c49e55;
+  letter-spacing: 2px;
   font-weight: 600;
 }
 
 .stub-code {
-  font-family: monospace;
-  font-size: 0.85rem;
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
   font-weight: 700;
-  color: var(--olive-dark);
+  color: #ffffff;
+}
+
+.stub-barcode {
+  font-family: 'Libre Barcode 39', monospace;
+  font-size: 1.65rem;
+  line-height: 0.85;
+  color: #e5c882;
+  margin-top: 3px;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .stub-validity {
   font-family: var(--font-title);
-  font-size: 0.58rem;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.52rem;
+  letter-spacing: 1.8px;
+  color: #e5c882;
+  font-weight: 600;
+  border-top: 1px solid rgba(229, 200, 130, 0.25);
+  padding-top: 5px;
+  width: 90%;
 }
 
 /* Botones del modal */
@@ -2242,37 +2397,29 @@ body {
 .gallery-controls { display:flex; align-items:center; justify-content:center; gap:24px; margin-top:20px; color:var(--olive-dark); font-size:12px; letter-spacing:3px; }
 .gallery-controls button { width:46px; height:46px; border:1px solid #c9b99f; background:transparent; border-radius:50%; color:var(--olive-dark); cursor:pointer; font-size:20px; }
 .gallery-hint { text-align:center; margin-top:12px; font-size:12px; color:#616958; }
-.wedding-ticket { width:740px; min-width:0; height:auto; min-height:340px; border-radius:3px; box-shadow:none; }
-.ticket-main-body { min-width:0; padding:26px 26px 22px; border-radius:0; gap:16px; }
-.ticket-top-brand { justify-content:center; padding:0 0 12px; }
-.ticket-vector-crest,.ticket-corner-vector,.ticket-perforation { display:none; }
-.ticket-badge-tag { font-size:10px; letter-spacing:2px; text-align:center; color:#856a36; }
-.ticket-couple-names { font-size:44px; line-height:1.15; }
-.ticket-guest-box { gap:14px; border-radius:0; padding:12px; }
-.ticket-field-col { min-width:0; }
-.ticket-guest-name { overflow-wrap:anywhere; }
-.ticket-passes-badge { flex-shrink:0; max-width:110px; }
-.ticket-venues-grid { border:0; background:transparent; padding:0; gap:14px; }
-.t-name { white-space:normal; overflow:visible; }
-.ticket-date-bar { padding-top:12px; }
-.ticket-date-bar span { font-size:10px; letter-spacing:1.4px; }
-.ticket-stub-body { flex:0 0 165px; width:auto; margin:8px; border:0; border-left:1px solid #d9c9a8; border-radius:0; padding:20px 12px; }
-.ticket-scroll-container { overflow:visible; }
-.ticket-modal-box { padding-top:52px; }
+.ticket-modal-box { max-width: 860px; padding-top: 48px; }
 :focus-visible { outline:2px solid #856a36; outline-offset:4px; }
-@media(max-width:600px) {
+@media(max-width:650px) {
  .ticket-modal-overlay { padding:10px; }
- .ticket-modal-box { padding:52px 12px 22px; max-height:94dvh; border-radius:12px; }
- .wedding-ticket { width:100%; flex-direction:column; }
- .ticket-main-body { margin:8px; padding:24px 16px 18px; gap:20px; }
- .ticket-couple-names { font-size:clamp(30px,8vw,40px); }
- .ticket-guest-name { font-size:14px; }
- .ticket-qty-label { letter-spacing:.5px; }
- .ticket-venues-grid { grid-template-columns:1fr; gap:14px; }
- .t-badge { font-size:10px; }
- .t-name { font-size:13px; }
- .ticket-stub-body { flex:auto; margin:0 8px 8px; border-left:0; border-top:1px solid #d9c9a8; gap:14px; padding:22px; }
- .stub-wreath-wrap { display:none; }
+ .ticket-modal-box { padding:48px 12px 22px; max-height:94dvh; border-radius:14px; }
+ .ticket-scroll-container { overflow-x:visible; padding:4px 0 10px; }
+ .wedding-ticket { width:100%; min-width:0; flex-direction:column; }
+ .ticket-vip-spine { width:100%; height:34px; flex-direction:row; padding:0 14px; border-right:none; border-bottom:2px solid #c49e55; }
+ .spine-vertical-text { writing-mode:horizontal-tb; transform:none; font-size:0.58rem; letter-spacing:2.5px; }
+ .ticket-main-body { margin:8px; padding:20px 14px 16px; gap:14px; }
+ .ticket-vector-crest { width:46px; }
+ .ticket-badge-tag { font-size:0.56rem; letter-spacing:1.8px; }
+ .ticket-couple-names { font-size:clamp(32px,8.5vw,42px); }
+ .ticket-guest-box { flex-direction:row; padding:10px 12px; gap:10px; }
+ .ticket-guest-name { font-size:0.95rem; }
+ .ticket-venues-grid { flex-direction:column; gap:10px; }
+ .ticket-venue-divider { width:100%; height:1px; }
+ .date-bar-text { font-size:0.54rem; letter-spacing:1.2px; }
+ .ticket-perforation { width:100%; height:20px; flex-direction:row; margin:0; }
+ .notch-top { width:12px; height:22px; border-radius:0 12px 12px 0; border:2px solid #c49e55; border-left:none; margin-top:0; margin-left:-2px; }
+ .notch-bottom { width:12px; height:22px; border-radius:12px 0 0 12px; border:2px solid #c49e55; border-right:none; margin-bottom:0; margin-right:-2px; }
+ .perf-dots { height:0; width:auto; border-left:none; border-top:2px dashed #c49e55; margin:0 6px; }
+ .ticket-stub-body { width:100%; flex:auto; padding:20px 16px; gap:12px; border-left:none; }
  .ticket-modal-actions { flex-direction:column; }
  .ticket-modal-actions button { width:100%; min-height:48px; }
  .form-input { font-size:16px; }

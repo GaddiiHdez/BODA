@@ -431,6 +431,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ticketGuestName) ticketGuestName.textContent = guestName;
         if (ticketPassesQty) ticketPassesQty.textContent = guestCount;
         if (ticketCodeDisplay) ticketCodeDisplay.textContent = ticketCode;
+        const ticketBarcodeDisplay = document.getElementById('ticketBarcodeDisplay');
+        if (ticketBarcodeDisplay) {
+          ticketBarcodeDisplay.textContent = `*${ticketCode.replace(/-/g, '')}*`;
+        }
 
         // Renderizar Código QR de alta precisión localmente (Vector/Canvas offline)
         if (ticketQrContainer) {
@@ -441,20 +445,20 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
               new QRCode(ticketQrContainer, {
                 text: qrText,
-                width: 86,
-                height: 86,
-                colorDark: "#2d382b",
+                width: 90,
+                height: 90,
+                colorDark: "#1e261c",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.M
               });
             } catch (qrErr) {
               console.warn('Error con QRCode local, usando fallback:', qrErr);
               const encoded = encodeURIComponent(qrText);
-              ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=2d382b&bgcolor=ffffff&data=${encoded}" style="width:86px;height:86px;" crossorigin="anonymous">`;
+              ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=1e261c&bgcolor=ffffff&data=${encoded}" style="width:90px;height:90px;" crossorigin="anonymous">`;
             }
           } else {
             const encoded = encodeURIComponent(qrText);
-            ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=2d382b&bgcolor=ffffff&data=${encoded}" style="width:86px;height:86px;" crossorigin="anonymous">`;
+            ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=1e261c&bgcolor=ffffff&data=${encoded}" style="width:90px;height:90px;" crossorigin="anonymous">`;
           }
         }
 
@@ -478,15 +482,15 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!window.html2canvas || !window.jspdf) throw new Error('Librerías PDF no disponibles');
               // Capture at an explicit desktop width, independent of modal scroll and viewport.
               const canvas = await html2canvas(ticketElement, {
-                scale: 3, useCORS: true, backgroundColor: '#fffefb',
-                windowWidth: 1000, scrollX: 0, scrollY: 0,
+                scale: 3, useCORS: true, backgroundColor: '#ffffff',
+                windowWidth: 1100, scrollX: 0, scrollY: 0,
                 onclone: (doc) => {
                   const ticket = doc.getElementById('weddingTicket');
                   const stage = doc.createElement('div');
-                  stage.style.cssText = 'position:absolute;left:0;top:0;width:740px;background:#fffefb;z-index:999999;';
+                  stage.style.cssText = 'position:absolute;left:0;top:0;width:780px;background:#ffffff;z-index:999999;';
                   doc.body.appendChild(stage);
                   stage.appendChild(ticket);
-                  ticket.style.cssText = 'width:740px;min-width:740px;height:auto;min-height:340px;margin:0;box-shadow:none;transform:none;';
+                  ticket.style.cssText = 'width:780px;min-width:780px;height:auto;min-height:330px;margin:0;box-shadow:none;transform:none;display:flex;flex-direction:row;';
                 }
               });
               // A5 landscape, centered with equal safe printing margins.
