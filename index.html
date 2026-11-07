@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación de Boda - Alexis & Estefanía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= BARRA SUPERIOR WEB ================= -->
+  <nav class="web-toolbar no-print">
+    <a href="Invitacion_Alexis_y_Estefania.pdf" download="Invitacion_Alexis_y_Estefania.pdf" class="action-pill primary-pill" style="text-decoration: none;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      <span>Descargar PDF de Imprenta</span>
+    </a>
+    <button id="printBtn" class="action-pill">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+      <span>Imprimir</span>
+    </button>
+    <button id="musicToggle" class="action-pill icon-pill" title="Música ambiental">
+      <span id="musicIcon">🎵</span>
+    </button>
+  </nav>
+
+  <!-- Audio de fondo opcional -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="invitation-wrapper">
+
+    <!-- ========================================================
+         CARA 1: DISEÑO OFICIAL DE CANVA (Arte de Alta Resolución)
+    ======================================================== -->
+    <article class="invitation-card canva-art-card">
+      <img src="assets/invitacion_canva.png" alt="Invitación de Boda Alexis y Estefanía" class="canva-full-art" />
+    </article>
+
+    <!-- ========================================================
+         CARA 2: EXPERIENCIA DIGITAL INTERACTIVA (Contador, Mapas, RSVP)
+    ======================================================== -->
+    <article class="invitation-card details-card no-print">
+      <div class="card-border-frame">
+
+        <header class="floral-hero-header header-garland-subtle">
+          <img src="assets/bottom_garland.png" alt="Detalle botánico" class="garland-top-img" />
+        </header>
+
+        <section class="card-content-body details-body">
+          <h2 class="section-script-title">Detalles & Ubicación</h2>
+          
+          <div class="gold-ornament-line">
+            <span class="line-side"></span>
+            <span class="symbol">✦ ✦ ✦</span>
+            <span class="line-side"></span>
+          </div>
+
+          <!-- Cuenta regresiva interactiva -->
+          <div class="countdown-container" style="margin-top: 0; margin-bottom: 24px;">
+            <p class="countdown-eyebrow">CUENTA REGRESIVA PARA EL 26 DE DICIEMBRE</p>
+            <div class="countdown-timer" id="countdown">
+              <div class="timer-unit"><span id="days">00</span><small>DÍAS</small></div>
+              <div class="timer-separator">:</div>
+              <div class="timer-unit"><span id="hours">00</span><small>HORAS</small></div>
+              <div class="timer-separator">:</div>
+              <div class="timer-unit"><span id="minutes">00</span><small>MIN</small></div>
+              <div class="timer-separator">:</div>
+              <div class="timer-unit"><span id="seconds">00</span><small>SEG</small></div>
+            </div>
+          </div>
+
+          <!-- Itinerario con enlaces a Google Maps -->
+          <div class="itinerary-grid">
+            <div class="itinerary-item">
+              <span class="itinerary-badge">5:00 PM</span>
+              <h3 class="itinerary-name">Ceremonia Religiosa</h3>
+              <p class="itinerary-place">Parroquia Inmaculada Concepción</p>
+              <a href="https://maps.google.com/?q=Parroquia+Inmaculada+Concepcion" target="_blank" class="geo-btn" style="margin-top: 8px;">
+                📍 Ver ubicación en Google Maps
+              </a>
+            </div>
+
+            <div class="itinerary-item">
+              <span class="itinerary-badge">6:00 PM</span>
+              <h3 class="itinerary-name">Recepción & Celebración</h3>
+              <p class="itinerary-place">Casino El Campesino</p>
+              <a href="https://maps.google.com/?q=Casino+El+Campesino" target="_blank" class="geo-btn" style="margin-top: 8px;">
+                📍 Ver ubicación en Google Maps
+              </a>
+            </div>
+          </div>
+
+          <!-- Padrinos de Boda -->
+          <div class="etiquette-box">
+            <h4 class="etiquette-title">PADRINOS DE BODA</h4>
+            <p class="etiquette-text">Esmeralda Ortega Delgado</p>
+            <p class="etiquette-text">&amp; Pedro Guillén Guzmán</p>
+          </div>
+
+          <!-- Módulo RSVP -->
+          <div class="rsvp-lux-box">
+            <h3 class="rsvp-title">Confirmación de Asistencia</h3>
+            <p class="rsvp-subtitle">Tu presencia hará inolvidable este día. Favor de confirmar tu asistencia por WhatsApp.</p>
+            
+            <div class="rsvp-action">
+              <a href="https://wa.me/521234567890?text=¡Hola!%20Confirmo%20con%20mucha%20alegría%20mi%20asistencia%20a%20la%20boda%20de%20Alexis%20y%20Estefanía%20el%2026%20de%20diciembre." target="_blank" class="whatsapp-lux-btn">
+                <span>Confirmar por WhatsApp</span>
+                <span class="arrow-right">→</span>
+              </a>
+            </div>
+          </div>
+
+          <footer class="closing-phrase">
+            ¡Te esperamos para celebrar juntos!
+          </footer>
+        </section>
+
+        <footer class="floral-hero-footer">
+          <img src="assets/bottom_garland.png" alt="Guirnalda botánica" class="garland-footer-img" />
+        </footer>
+
+      </div>
+    </article>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
