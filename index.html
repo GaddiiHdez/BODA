@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boda Alexis & Estefanía · 26 de Diciembre de 2026</title>
   
   <!-- OpenGraph / Metadatos para compartir en WhatsApp y Redes -->
@@ -17,7 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Libre+Barcode+39&display=swap" rel="stylesheet">
   
   <!-- Librería para generación de PDF de alta resolución -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <!-- Generador local de Códigos QR vectoriales y canvas offline -->
   <script src="qrcode.min.js"></script>
 
@@ -336,8 +337,8 @@
   <!-- ================= FOTOGRAFÍA EDITORIAL & HISTORIA ================= -->
   <section class="section gallery-feature-section">
     <div class="section-container">
-      <div class="editorial-gallery-grid">
-        <div class="editorial-photo-card reveal fade-right">
+      <div class="editorial-gallery-grid" id="storyCarousel" role="region" aria-label="Fotografías de nuestra historia" tabindex="0">
+        <div class="editorial-photo-card" role="group" aria-label="Fotografía 1 de 2">
           <div class="photo-container">
             <img src="img/abrazo_playa.jpg" alt="Alexis y Estefanía - Abrazo al atardecer" class="editorial-img">
             <div class="photo-overlay-caption">
@@ -347,7 +348,7 @@
             </div>
           </div>
         </div>
-        <div class="editorial-photo-card reveal fade-left">
+        <div class="editorial-photo-card" role="group" aria-label="Fotografía 2 de 2">
           <div class="photo-container">
             <img src="img/pareja_sonriente.jpg" alt="Alexis y Estefanía - Sonriendo al atardecer" class="editorial-img">
             <div class="photo-overlay-caption">
@@ -358,6 +359,8 @@
           </div>
         </div>
       </div>
+      <div class="gallery-controls"><button type="button" id="storyPrev" aria-label="Fotografía anterior">←</button><span id="storyPosition" aria-live="polite">01 / 02</span><button type="button" id="storyNext" aria-label="Fotografía siguiente">→</button></div>
+      <p class="gallery-hint">Desliza para descubrir nuestra historia</p>
     </div>
   </section>
 
@@ -603,7 +606,7 @@
       <div class="modal-header-text">
         <span class="sparkle-gold">✦ ✦ ✦</span>
         <h3 class="modal-congrats-title">¡Registro Confirmado con Éxito!</h3>
-        <p class="modal-congrats-sub">Aquí tienes tu pase oficial de acceso para la boda de Alexis &amp; Estefanía.</p>
+        <p class="modal-congrats-sub">Aquí tienes tu pase de acceso para la boda de Alexis &amp; Estefanía.</p>
       </div>
 
       <!-- BOLETO DE GALA (TICKET FORMATO IMPRENTA Y PDF) -->
@@ -649,7 +652,7 @@
 
             <!-- ENCABEZADO Y GUIRNALDA BOTÁNICA VECTORIAL -->
             <div class="ticket-top-brand">
-              <span class="ticket-badge-tag">PASE DE ACCESO DE HONOR · BOLETO OFICIAL</span>
+              <span class="ticket-badge-tag">PASE DE ACCESO DE HONOR</span>
               <svg class="ticket-vector-crest" viewBox="0 0 240 22" fill="none">
                 <path d="M100 11 C75 12, 50 9, 10 5" stroke="#c49e55" stroke-width="1.2" stroke-linecap="round"/>
                 <path d="M85 11 C78 7, 70 8, 73 3 C77 0, 84 4, 86 10 Z" fill="#c49e55" fill-opacity="0.35" stroke="#c49e55" stroke-width="0.8"/>
@@ -717,7 +720,7 @@
 
             <!-- BARRA INFERIOR DE FECHA Y SEDE -->
             <div class="ticket-date-bar">
-              <span>✦ SÁBADO, 26 DE DICIEMBRE DE 2026 · CULIACÁN, SIN. ✦</span>
+              <span>✦ SÁBADO, 26 DE DICIEMBRE DE 2026 · TEPIC, PUGA, NAYARIT ✦</span>
             </div>
           </div>
 
@@ -768,7 +771,7 @@
       <div class="ticket-modal-actions">
         <button class="btn btn-gold" id="downloadTicketPdfBtn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          <span>Descargar Boleto en PDF</span>
+          <span>Descargar pase en PDF</span>
         </button>
         <button class="btn btn-whatsapp-ticket" id="ticketWhatsAppBtn">
           <span>Enviar Confirmación por WhatsApp</span>

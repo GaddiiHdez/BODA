@@ -5,6 +5,25 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const carousel = document.getElementById('storyCarousel');
+  if (carousel) {
+    const slides = [...carousel.children];
+    let current = 0;
+    function move(delta) {
+      current = (current + delta + slides.length) % slides.length;
+      carousel.scrollTo({left: slides[current].offsetLeft - slides[0].offsetLeft, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+    }
+    document.getElementById('storyPrev').onclick = () => move(-1);
+    document.getElementById('storyNext').onclick = () => move(1);
+    carousel.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); move(e.key === 'ArrowRight' ? 1 : -1); }
+    });
+    carousel.addEventListener('scroll', () => {
+      current = slides.reduce((best, slide, i) => Math.abs(slide.offsetLeft-slides[0].offsetLeft-carousel.scrollLeft) < Math.abs(slides[best].offsetLeft-slides[0].offsetLeft-carousel.scrollLeft) ? i : best, 0);
+      document.getElementById('storyPosition').textContent = `0${current+1} / 0${slides.length}`;
+    }, {passive:true});
+  }
+
   // ==========================================
   // 1. CUENTA REGRESIVA EN TIEMPO REAL
   // ==========================================
@@ -455,77 +474,30 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadTicketPdfBtn.innerHTML = `<span>⏳ Generando Boleto en PDF...</span>`;
 
             try {
-              // 1. Clonar el elemento del boleto para aislarlo de modal fijo, scrollbars y transformaciones CSS
-              const clone = ticketElement.cloneNode(true);
-              clone.id = 'weddingTicketPdfClone';
-
-              // Copiar el contenido exacto del QR (canvas/img) del original al clon
-              const liveQr = ticketElement.querySelector('.stub-qr-render-area');
-              const cloneQr = clone.querySelector('.stub-qr-render-area');
-              if (liveQr && cloneQr) {
-                cloneQr.innerHTML = liveQr.innerHTML;
-                const liveCanvas = liveQr.querySelector('canvas');
-                const cloneCanvas = cloneQr.querySelector('canvas');
-                if (liveCanvas && cloneCanvas) {
-                  const ctx = cloneCanvas.getContext('2d');
-                  ctx.drawImage(liveCanvas, 0, 0);
+              await document.fonts.ready;
+              if (!window.html2canvas || !window.jspdf) throw new Error('Librerías PDF no disponibles');
+              // Capture at an explicit desktop width, independent of modal scroll and viewport.
+              const canvas = await html2canvas(ticketElement, {
+                scale: 3, useCORS: true, backgroundColor: '#fffefb',
+                windowWidth: 1000, scrollX: 0, scrollY: 0,
+                onclone: (doc) => {
+                  const ticket = doc.getElementById('weddingTicket');
+                  const stage = doc.createElement('div');
+                  stage.style.cssText = 'position:absolute;left:0;top:0;width:740px;background:#fffefb;z-index:999999;';
+                  doc.body.appendChild(stage);
+                  stage.appendChild(ticket);
+                  ticket.style.cssText = 'width:740px;min-width:740px;height:auto;min-height:340px;margin:0;box-shadow:none;transform:none;';
                 }
-              }
-
-              // 2. Montar el clon en un contenedor temporal en coordenadas raíz absolutas
-              const staging = document.createElement('div');
-              staging.style.position = 'absolute';
-              staging.style.top = '0px';
-              staging.style.left = '0px';
-              staging.style.width = '740px';
-              staging.style.height = '300px';
-              staging.style.zIndex = '-99999';
-              staging.style.opacity = '1';
-              staging.style.background = '#ffffff';
-              staging.style.pointerEvents = 'none';
-              staging.style.margin = '0';
-              staging.style.padding = '0';
-              staging.style.transform = 'none';
-
-              clone.style.margin = '0';
-              clone.style.transform = 'none';
-              staging.appendChild(clone);
-              document.body.appendChild(staging);
-
-              // 3. Opciones de exportación exacta: 210mm x 85mm horizontal (formato boleto real sin saltos de página)
-              const cleanFileName = `Pase_Boda_Alexis_y_Estefania_${guestName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
-              
-              if (typeof html2pdf !== 'undefined') {
-                const opt = {
-                  margin: 0,
-                  filename: cleanFileName,
-                  image: { type: 'jpeg', quality: 0.98 },
-                  html2canvas: {
-                    scale: 2.5,
-                    useCORS: true,
-                    logging: false,
-                    scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: 740,
-                    windowHeight: 300,
-                    backgroundColor: '#fffefb'
-                  },
-                  jsPDF: {
-                    unit: 'mm',
-                    format: [210, 85],
-                    orientation: 'landscape'
-                  }
-                };
-
-                await html2pdf().set(opt).from(clone).save();
-              } else {
-                window.print();
-              }
-
-              // Limpiar contenedor staging
-              if (staging.parentNode) {
-                staging.parentNode.removeChild(staging);
-              }
+              });
+              // A5 landscape, centered with equal safe printing margins.
+              const pdf = new window.jspdf.jsPDF({orientation:'landscape', unit:'mm', format:'a5'});
+              const pageW = pdf.internal.pageSize.getWidth();
+              const pageH = pdf.internal.pageSize.getHeight();
+              const ratio = Math.min((pageW - 20) / canvas.width, (pageH - 20) / canvas.height);
+              const width = canvas.width * ratio;
+              const height = canvas.height * ratio;
+              pdf.addImage(canvas.toDataURL('image/png'), 'PNG', (pageW-width)/2, (pageH-height)/2, width, height);
+              pdf.save(`Pase_Boda_Alexis_y_Estefania_${guestName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`);
 
               downloadTicketPdfBtn.innerHTML = `<span>✓ ¡Boleto Descargado!</span>`;
               setTimeout(() => {

@@ -2225,3 +2225,59 @@ body {
   background: #1eb756;
   transform: translateY(-2px);
 }
+/* Editorial refinements: mobile invitation, family portraits, and printable pass. */
+.family-honor-section { position:relative; isolation:isolate; background: #faf8f5; }
+.family-honor-section::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(#faf8f5,rgba(250,248,245,.86) 20%,rgba(250,248,245,.91) 80%,#faf8f5),url('img/abrazo_playa.jpg') center/cover; }
+.honor-frame { background:rgba(255,254,251,.88); border-radius:4px; padding:10px; }
+.frame-inner { background:transparent; border-style:solid; border-radius:0; padding:36px 22px; }
+.parents-col,.court-card { background:rgba(255,254,251,.94); border-radius:3px; border:1px solid #ddd2bc; box-shadow:0 8px 25px #343b2c08; }
+.parents-col { width:100%; border-top:3px solid #b89a61; }
+.court-role-badge { background:transparent; border:0; border-radius:0; border-bottom:1px solid #d9c9a8; padding-bottom:10px; }
+.court-card { padding:28px 20px; }
+@media(min-width:650px) { .court-cards-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } .court-card { grid-column:span 2; } .court-card:nth-child(3) { grid-column:2 / 4; } .court-card-wide { grid-column:1 / -1; } }
+.editorial-gallery-grid { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; position:relative; border-radius:8px; }
+.editorial-gallery-grid::-webkit-scrollbar { display:none; }
+.editorial-photo-card { flex:0 0 100%; scroll-snap-align:center; border-radius:8px; box-shadow:none; }
+.photo-container { height:clamp(420px,65vh,660px); }
+.gallery-controls { display:flex; align-items:center; justify-content:center; gap:24px; margin-top:20px; color:var(--olive-dark); font-size:12px; letter-spacing:3px; }
+.gallery-controls button { width:46px; height:46px; border:1px solid #c9b99f; background:transparent; border-radius:50%; color:var(--olive-dark); cursor:pointer; font-size:20px; }
+.gallery-hint { text-align:center; margin-top:12px; font-size:12px; color:#616958; }
+.wedding-ticket { width:740px; min-width:0; height:auto; min-height:340px; border-radius:3px; box-shadow:none; }
+.ticket-main-body { min-width:0; padding:26px 26px 22px; border-radius:0; gap:16px; }
+.ticket-top-brand { justify-content:center; padding:0 0 12px; }
+.ticket-vector-crest,.ticket-corner-vector,.ticket-perforation { display:none; }
+.ticket-badge-tag { font-size:10px; letter-spacing:2px; text-align:center; color:#856a36; }
+.ticket-couple-names { font-size:44px; line-height:1.15; }
+.ticket-guest-box { gap:14px; border-radius:0; padding:12px; }
+.ticket-field-col { min-width:0; }
+.ticket-guest-name { overflow-wrap:anywhere; }
+.ticket-passes-badge { flex-shrink:0; max-width:110px; }
+.ticket-venues-grid { border:0; background:transparent; padding:0; gap:14px; }
+.t-name { white-space:normal; overflow:visible; }
+.ticket-date-bar { padding-top:12px; }
+.ticket-date-bar span { font-size:10px; letter-spacing:1.4px; }
+.ticket-stub-body { flex:0 0 165px; width:auto; margin:8px; border:0; border-left:1px solid #d9c9a8; border-radius:0; padding:20px 12px; }
+.ticket-scroll-container { overflow:visible; }
+.ticket-modal-box { padding-top:52px; }
+:focus-visible { outline:2px solid #856a36; outline-offset:4px; }
+@media(max-width:600px) {
+ .ticket-modal-overlay { padding:10px; }
+ .ticket-modal-box { padding:52px 12px 22px; max-height:94dvh; border-radius:12px; }
+ .wedding-ticket { width:100%; flex-direction:column; }
+ .ticket-main-body { margin:8px; padding:24px 16px 18px; gap:20px; }
+ .ticket-couple-names { font-size:clamp(30px,8vw,40px); }
+ .ticket-guest-name { font-size:14px; }
+ .ticket-qty-label { letter-spacing:.5px; }
+ .ticket-venues-grid { grid-template-columns:1fr; gap:14px; }
+ .t-badge { font-size:10px; }
+ .t-name { font-size:13px; }
+ .ticket-stub-body { flex:auto; margin:0 8px 8px; border-left:0; border-top:1px solid #d9c9a8; gap:14px; padding:22px; }
+ .stub-wreath-wrap { display:none; }
+ .ticket-modal-actions { flex-direction:column; }
+ .ticket-modal-actions button { width:100%; min-height:48px; }
+ .form-input { font-size:16px; }
+ .photo-overlay-caption { padding:45px 20px 28px; }
+ .honor-eyebrow { font-size:10px; letter-spacing:2px; }
+ .parent-name-item { font-size:15px; letter-spacing:.7px; }
+}
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } .reveal { opacity:1; transform:none; } }
