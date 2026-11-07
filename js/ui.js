@@ -115,3 +115,25 @@ function initDrivePhotos() {
     });
   }
 }
+
+// Fixed RSVP shortcut, hidden only while the confirmation section is on screen.
+function initFloatingRsvp() {
+  const button = document.getElementById('rsvpFloatingBtn');
+  const section = document.getElementById('rsvp');
+  if (!button || !section) return;
+
+  function updateVisibility() {
+    const rect = section.getBoundingClientRect();
+    button.hidden = rect.top < window.innerHeight && rect.bottom > 0;
+  }
+  updateVisibility();
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      button.hidden = entry.isIntersecting;
+    }, { threshold: 0 });
+    observer.observe(section);
+  } else {
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+  }
+}

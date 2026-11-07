@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initCalendar === 'function') initCalendar();
   if (typeof initCopyLiverpool === 'function') initCopyLiverpool();
   if (typeof initDrivePhotos === 'function') initDrivePhotos();
+  if (typeof initFloatingRsvp === 'function') initFloatingRsvp();
 
   // 5. Modal de Boleto y RSVP Inteligente
   if (typeof initTicketModal === 'function') initTicketModal();
