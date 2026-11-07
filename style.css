@@ -655,7 +655,7 @@ body {
 }
 
 .ceremony-banner {
-  background-image: linear-gradient(rgba(45, 56, 43, 0.4), rgba(45, 56, 43, 0.8)), url('assets/header_crown.png');
+  background-image: linear-gradient(rgba(30, 38, 28, 0.35), rgba(25, 33, 23, 0.8)), url('img/parroquia.png');
   background-color: var(--olive-dark);
 }
 
