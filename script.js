@@ -482,25 +482,27 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!window.html2canvas || !window.jspdf) throw new Error('Librerías PDF no disponibles');
               // Capture at an explicit desktop width, independent of modal scroll and viewport.
               const canvas = await html2canvas(ticketElement, {
-                scale: 3, useCORS: true, backgroundColor: '#ffffff',
+                scale: 3, useCORS: true, backgroundColor: '#f6efe2',
                 windowWidth: 1100, scrollX: 0, scrollY: 0,
                 onclone: (doc) => {
                   const ticket = doc.getElementById('weddingTicket');
                   const stage = doc.createElement('div');
-                  stage.style.cssText = 'position:absolute;left:0;top:0;width:780px;background:#ffffff;z-index:999999;';
+                  stage.style.cssText = 'position:absolute;left:0;top:0;width:780px;background:#f6efe2;z-index:999999;padding:0;margin:0;';
                   doc.body.appendChild(stage);
                   stage.appendChild(ticket);
-                  ticket.style.cssText = 'width:780px;min-width:780px;height:auto;min-height:330px;margin:0;box-shadow:none;transform:none;display:flex;flex-direction:row;';
+                  ticket.style.cssText = 'width:780px;min-width:780px;height:auto;min-height:330px;margin:0;border-radius:0;box-shadow:none;transform:none;display:flex;flex-direction:row;';
                 }
               });
-              // A5 landscape, centered with equal safe printing margins.
-              const pdf = new window.jspdf.jsPDF({orientation:'landscape', unit:'mm', format:'a5'});
-              const pageW = pdf.internal.pageSize.getWidth();
-              const pageH = pdf.internal.pageSize.getHeight();
-              const ratio = Math.min((pageW - 20) / canvas.width, (pageH - 20) / canvas.height);
-              const width = canvas.width * ratio;
-              const height = canvas.height * ratio;
-              pdf.addImage(canvas.toDataURL('image/png'), 'PNG', (pageW-width)/2, (pageH-height)/2, width, height);
+              // Full-bleed PDF matching the exact dimensions of the ticket (0 white margins).
+              const pdfW = canvas.width / 3;
+              const pdfH = canvas.height / 3;
+              const pdf = new window.jspdf.jsPDF({
+                orientation: pdfW >= pdfH ? 'landscape' : 'portrait',
+                unit: 'px',
+                format: [pdfW, pdfH],
+                hotfixes: ['px_scaling']
+              });
+              pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdfW, pdfH);
               pdf.save(`Pase_Boda_Alexis_y_Estefania_${guestName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`);
 
               downloadTicketPdfBtn.innerHTML = `<span>✓ ¡Boleto Descargado!</span>`;
