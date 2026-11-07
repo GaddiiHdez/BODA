@@ -250,74 +250,169 @@
     </div>
   </section>
 
-  <!-- ================= CÓDIGO DE VESTIMENTA ================= -->
-  <section class="section dresscode-section">
+  <!-- ================= MESA DE REGALOS MEJORADA ================= -->
+  <section class="section gifts-section" id="gifts">
     <div class="section-container">
-      <div class="dresscode-box reveal fade-up">
-        <span class="dresscode-icon">👔 👗</span>
-        <p class="section-eyebrow">DRESS CODE</p>
-        <h3 class="dresscode-main-title">Rigurosa Etiqueta / Formal</h3>
-        <p class="dresscode-desc">
-          Queremos que luzcas espectacular. Te invitamos a vestir de gala en tonos elegantes.
+      
+      <div class="section-head reveal fade-up">
+        <p class="section-eyebrow">DETALLES &amp; PRESENTES</p>
+        <h2 class="section-script-title">Mesa de Regalos</h2>
+        <p class="section-tagline">TU PRESENCIA ES NUESTRO MAYOR REGALO</p>
+        <div class="gold-divider">
+          <span class="line"></span>
+          <span class="ornament">✉️ ✦ 🎁</span>
+          <span class="line"></span>
+        </div>
+        <p class="gifts-intro-text">
+          Si deseas honrarnos con un detalle para ayudarnos a comenzar nuestro nuevo hogar y luna de miel, ponemos a tu disposición las siguientes opciones:
         </p>
+      </div>
+
+      <div class="gifts-grid">
         
-        <div class="palette-wrapper">
-          <p class="palette-title">Paleta de Colores Sugerida</p>
-          <div class="color-swatches">
-            <div class="swatch" style="background: #3f4e3c;" title="Verde Olivo Profundo"><span>Olivo</span></div>
-            <div class="swatch" style="background: #8e9e87;" title="Verde Salvia"><span>Salvia</span></div>
-            <div class="swatch" style="background: #c4a96b;" title="Dorado Cálido"><span>Dorado</span></div>
-            <div class="swatch" style="background: #2b303a;" title="Azul Marino / Medianoche"><span>Marino</span></div>
-            <div class="swatch" style="background: #1a1a1a;" title="Negro Clásico"><span>Negro</span></div>
+        <!-- OPCIÓN 1: LLUVIA DE SOBRES -->
+        <div class="gift-option-card reveal fade-right">
+          <div class="gift-card-badge">PRESENCIAL</div>
+          <div class="gift-card-icon">✉️</div>
+          <h3 class="gift-card-title">Lluvia de Sobres</h3>
+          <p class="gift-card-desc">
+            Dispondremos de un cofre especial y sobres en la entrada de la recepción para recibir tus buenos deseos y presente en efectivo.
+          </p>
+          <div class="gift-card-footer">
+            <span class="gift-location-tag">📍 Casino El Campesino</span>
           </div>
         </div>
 
-        <div class="bride-courtesy-note">
-          <span class="sparkle-star">✦</span>
-          <span>Agradecemos con cariño reservar los tonos <strong>blanco, perla y marfil</strong> exclusivamente para la novia.</span>
-          <span class="sparkle-star">✦</span>
+        <!-- OPCIÓN 2: TRANSFERENCIA BANCARIA -->
+        <div class="gift-option-card bank-luxury-card reveal fade-left">
+          <div class="gift-card-badge gold-badge">TRANSFERENCIA</div>
+          <div class="gift-card-icon">💳</div>
+          <h3 class="gift-card-title">Transferencia Digital</h3>
+          <p class="gift-card-desc">
+            Si prefieres realizar una transferencia bancaria desde tu aplicación móvil:
+          </p>
+          
+          <div class="bank-details-card">
+            <div class="bank-field">
+              <span class="field-label">Banco:</span>
+              <strong class="field-val">BBVA</strong>
+            </div>
+            <div class="bank-field">
+              <span class="field-label">Beneficiario:</span>
+              <strong class="field-val">Alexis &amp; Estefanía</strong>
+            </div>
+            <div class="bank-field clabe-field">
+              <span class="field-label">CLABE Interbancaria:</span>
+              <div class="clabe-copy-box">
+                <code class="clabe-number" id="clabeCode">012345678901234567</code>
+                <button class="btn-copy-chip" id="copyClabeBtn" title="Copiar CLABE">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copiar</span>
+                </button>
+              </div>
+            </div>
+            <div class="copy-toast" id="copyFeedback">✓ ¡CLABE copiada al portapapeles!</div>
+          </div>
+
+          <button class="btn btn-outline-gold btn-full" id="copyAllBankBtn">
+            📋 Copiar Todos los Datos Bancarios
+          </button>
         </div>
+
       </div>
+
     </div>
   </section>
 
-  <!-- ================= MESA DE REGALOS / LLUVIA DE SOBRES ================= -->
-  <section class="section gifts-section">
+  <!-- ================= SECCIÓN NUEVA: ÁLBUM DE FOTOS DE LOS INVITADOS ================= -->
+  <section class="section guest-photos-section" id="photos">
     <div class="section-container">
-      <div class="gifts-card reveal fade-up">
-        <div class="gifts-icon">✉️ 🎁</div>
-        <p class="section-eyebrow">DETALLES &amp; PRESENTES</p>
-        <h3 class="gifts-title">Lluvia de Sobres &amp; Regalos</h3>
-        <p class="gifts-description">
-          El mejor regalo es tu presencia y bendición en nuestro matrimonio. Sin embargo, si deseas hacernos un presente, te agradeceremos una muestra de cariño en nuestra <strong>Lluvia de Sobres</strong> el día del evento, o vía transferencia.
-        </p>
-
-        <button class="btn btn-outline-gold toggle-bank-btn" id="toggleBankBtn">
-          <span>Ver Datos Bancarios</span>
-          <span class="arrow">↓</span>
-        </button>
-
-        <div class="bank-details-collapse" id="bankDetails">
-          <div class="bank-info-box">
-            <div class="bank-row">
-              <span class="bank-label">Banco:</span>
-              <strong class="bank-val">BBVA</strong>
-            </div>
-            <div class="bank-row">
-              <span class="bank-label">Beneficiario:</span>
-              <strong class="bank-val">Alexis &amp; Estefanía</strong>
-            </div>
-            <div class="bank-row">
-              <span class="bank-label">Cuenta CLABE:</span>
-              <div class="clabe-wrapper">
-                <code class="bank-val clabe-code" id="clabeCode">012345678901234567</code>
-                <button class="copy-btn" id="copyClabeBtn" title="Copiar CLABE">Copiar</button>
-              </div>
-            </div>
-            <span class="copy-feedback" id="copyFeedback">¡CLABE copiada al portapapeles!</span>
-          </div>
+      
+      <div class="section-head reveal fade-up">
+        <p class="section-eyebrow">RECUERDOS COMPARTIDOS</p>
+        <h2 class="section-script-title">Álbum de Recuerdos</h2>
+        <p class="section-tagline">¡QUEREMOS VER NUESTRA BODA A TRAVÉS DE TUS OJOS!</p>
+        <div class="gold-divider">
+          <span class="line"></span>
+          <span class="ornament">📸 ✦ 🥂</span>
+          <span class="line"></span>
         </div>
       </div>
+
+      <div class="photo-upload-container reveal fade-up">
+        
+        <!-- Columna Izquierda: Instrucciones y Botón -->
+        <div class="upload-info-col">
+          <span class="camera-emoji-badge">📷</span>
+          <h3 class="upload-title">Comparte tus fotos y videos con nosotros</h3>
+          <p class="upload-lead">
+            Los momentos más espontáneos e inolvidables son los que capturas tú con tu celular. Ayúdanos a revivir cada instante subiendo tus fotos a nuestra carpeta compartida de Google Drive.
+          </p>
+
+          <div class="upload-steps">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div>
+                <strong>Toma fotos y videos</strong>
+                <p>Captura los mejores momentos durante la misa y la fiesta.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div>
+                <strong>Sube tus tomas</strong>
+                <p>Usa el botón de abajo o escanea el QR en tu mesa con tu cámara.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div>
+                <strong>¡Recuerdos para siempre!</strong>
+                <p>Formarán parte del álbum digital oficial de Alexis &amp; Estefanía.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="upload-cta-wrap">
+            <a href="https://drive.google.com/drive/folders/1BodaAlexisEstefaniaDriveFolder?usp=sharing" target="_blank" class="btn btn-gold btn-drive" id="driveUploadBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>Subir Fotos a Google Drive</span>
+            </a>
+            <span class="upload-hint">No necesitas instalar ninguna aplicación extra</span>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta con Código QR para la Mesa -->
+        <div class="qr-card-col">
+          <div class="qr-card-frame">
+            <div class="qr-card-header">
+              <span class="qr-leaf">🌿</span>
+              <h4 class="qr-card-title">Escanea en tu Mesa</h4>
+              <p class="qr-card-subtitle">Apunta con la cámara de tu celular</p>
+            </div>
+
+            <!-- Código QR generado dinámicamente -->
+            <div class="qr-image-wrapper">
+              <img id="driveQrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&color=2d382b&bgcolor=ffffff&data=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1BodaAlexisEstefaniaDriveFolder%3Fusp%3Dsharing" alt="Código QR para subir fotos de la boda" class="qr-code-img">
+            </div>
+
+            <p class="qr-scan-text">
+              ✨ También puedes descargar este QR para imprimir pequeñas tarjetas para las mesas de los invitados.
+            </p>
+
+            <button class="btn btn-outline-gold btn-small" id="downloadQrBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Descargar Imagen del QR</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </section>
 

@@ -164,32 +164,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 6. ACORDEÓN DE DATOS BANCARIOS & COPIAR CLABE
+  // CONFIGURACIÓN PERSONALIZABLE
   // ==========================================
-  const toggleBankBtn = document.getElementById('toggleBankBtn');
-  const bankDetails = document.getElementById('bankDetails');
+  // Enlace a la carpeta de Google Drive donde los invitados subirán sus fotos
+  const GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1BodaAlexisEstefaniaDriveFolder?usp=sharing";
+
+  // Actualizar enlace y QR automáticamente
+  const driveUploadBtn = document.getElementById('driveUploadBtn');
+  const driveQrImage = document.getElementById('driveQrImage');
+  if (driveUploadBtn) {
+    driveUploadBtn.href = GOOGLE_DRIVE_FOLDER_URL;
+  }
+  if (driveQrImage) {
+    const encodedDriveUrl = encodeURIComponent(GOOGLE_DRIVE_FOLDER_URL);
+    driveQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&color=2d382b&bgcolor=ffffff&data=${encodedDriveUrl}`;
+  }
+
+  // Descarga del código QR para las mesas
+  const downloadQrBtn = document.getElementById('downloadQrBtn');
+  if (downloadQrBtn) {
+    downloadQrBtn.addEventListener('click', async () => {
+      const qrUrl = driveQrImage ? driveQrImage.src : `https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=15&color=2d382b&bgcolor=ffffff&data=${encodeURIComponent(GOOGLE_DRIVE_FOLDER_URL)}`;
+      try {
+        const response = await fetch(qrUrl);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = "QR_Subir_Fotos_Boda_Alexis_y_Estefania.png";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
+      } catch (err) {
+        // En caso de bloqueo por CORS, abrir la imagen directamente para guardar
+        window.open(qrUrl, '_blank');
+      }
+    });
+  }
+
+  // ==========================================
+  // 6. SISTEMA MEJORADO DE DATOS BANCARIOS (1-CLIC)
+  // ==========================================
   const copyClabeBtn = document.getElementById('copyClabeBtn');
+  const copyAllBankBtn = document.getElementById('copyAllBankBtn');
   const clabeCode = document.getElementById('clabeCode');
   const copyFeedback = document.getElementById('copyFeedback');
 
-  if (toggleBankBtn && bankDetails) {
-    toggleBankBtn.addEventListener('click', () => {
-      const isOpen = bankDetails.classList.toggle('show');
-      toggleBankBtn.classList.toggle('open', isOpen);
-      toggleBankBtn.querySelector('span:first-child').textContent = isOpen ? 'Ocultar Datos Bancarios' : 'Ver Datos Bancarios';
-    });
+  function showCopyFeedback(msg = "✓ ¡Copiado con éxito!") {
+    if (copyFeedback) {
+      copyFeedback.textContent = msg;
+      copyFeedback.style.display = 'block';
+      setTimeout(() => {
+        copyFeedback.style.display = 'none';
+      }, 3500);
+    }
   }
 
   if (copyClabeBtn && clabeCode) {
     copyClabeBtn.addEventListener('click', () => {
       const text = clabeCode.textContent.trim();
       navigator.clipboard.writeText(text).then(() => {
-        if (copyFeedback) {
-          copyFeedback.style.display = 'block';
-          setTimeout(() => {
-            copyFeedback.style.display = 'none';
-          }, 3500);
-        }
+        showCopyFeedback("✓ ¡CLABE copiada al portapapeles!");
+      }).catch(err => {
+        console.error('Error al copiar:', err);
+      });
+    });
+  }
+
+  if (copyAllBankBtn) {
+    copyAllBankBtn.addEventListener('click', () => {
+      const bankDetailsText = `DATOS PARA TRANSFERENCIA · BODA ALEXIS & ESTEFANÍA\nBanco: BBVA\nBeneficiario: Alexis & Estefanía\nCLABE Interbancaria: ${clabeCode ? clabeCode.textContent.trim() : '012345678901234567'}`;
+      navigator.clipboard.writeText(bankDetailsText).then(() => {
+        showCopyFeedback("✓ ¡Todos los datos bancarios copiados!");
       }).catch(err => {
         console.error('Error al copiar:', err);
       });
