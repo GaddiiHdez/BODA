@@ -447,18 +447,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: qrText,
                 width: 90,
                 height: 90,
-                colorDark: "#1e261c",
-                colorLight: "#ffffff",
+                colorDark: "#3f4f3c",
+                colorLight: "#fffdf9",
                 correctLevel: QRCode.CorrectLevel.M
               });
             } catch (qrErr) {
               console.warn('Error con QRCode local, usando fallback:', qrErr);
               const encoded = encodeURIComponent(qrText);
-              ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=1e261c&bgcolor=ffffff&data=${encoded}" style="width:90px;height:90px;" crossorigin="anonymous">`;
+              ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=3f4f3c&bgcolor=fffdf9&data=${encoded}" style="width:90px;height:90px;" crossorigin="anonymous">`;
             }
           } else {
             const encoded = encodeURIComponent(qrText);
-            ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=1e261c&bgcolor=ffffff&data=${encoded}" style="width:90px;height:90px;" crossorigin="anonymous">`;
+            ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=3f4f3c&bgcolor=fffdf9&data=${encoded}" style="width:90px;height:90px;" crossorigin="anonymous">`;
           }
         }
 

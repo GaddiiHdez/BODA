@@ -1857,7 +1857,7 @@ body {
 }
 
 /* ========================================================
-   DISEÑO DEL BOLETO DE GALA IMPERIAL (ROYAL OPERA VIP PASS)
+   DISEÑO DEL BOLETO DE GALA (VERDE OLIVO, CREMA ARENA & GLASSMORPHISM)
 ======================================================== */
 .wedding-ticket {
   width: 780px;
@@ -1865,27 +1865,61 @@ body {
   min-height: 330px;
   margin: 0 auto;
   display: flex;
-  background: #faf6ee;
-  border: 2px solid #c49e55;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #fdfcf9 0%, #f6efe2 52%, #efe5d2 100%);
+  border: 2px solid #c9a763;
+  border-radius: 12px;
   position: relative;
-  box-shadow: 0 22px 60px rgba(24, 31, 23, 0.25);
+  box-shadow: 0 22px 60px rgba(78, 94, 75, 0.22);
   text-align: left;
   box-sizing: border-box;
   overflow: hidden;
 }
 
-/* 1. Franja Lateral Izquierda Imperial */
+/* Esferas ambientales suaves para resaltar el efecto Glassmorphism */
+.ticket-glass-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-gold-1 {
+  width: 240px;
+  height: 240px;
+  top: -70px;
+  left: 110px;
+  background: radial-gradient(circle, rgba(212, 179, 111, 0.28) 0%, rgba(212, 179, 111, 0) 70%);
+}
+
+.orb-olive-2 {
+  width: 260px;
+  height: 260px;
+  bottom: -80px;
+  left: 280px;
+  background: radial-gradient(circle, rgba(92, 110, 86, 0.2) 0%, rgba(92, 110, 86, 0) 70%);
+}
+
+.orb-gold-3 {
+  width: 190px;
+  height: 190px;
+  top: 40px;
+  right: 170px;
+  background: radial-gradient(circle, rgba(196, 158, 85, 0.22) 0%, rgba(196, 158, 85, 0) 70%);
+}
+
+/* 1. Franja Lateral Izquierda en Verde Olivo Elegante */
 .ticket-vip-spine {
-  width: 44px;
-  background: #1e261c;
-  border-right: 2px solid #c49e55;
+  width: 42px;
+  background: linear-gradient(180deg, rgba(92, 111, 86, 0.94) 0%, rgba(74, 91, 69, 0.96) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1.5px solid #d4b475;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 16px 0;
-  color: #e5c882;
+  color: #f6e6c2;
   flex-shrink: 0;
   position: relative;
   z-index: 3;
@@ -1893,7 +1927,7 @@ body {
 
 .spine-star {
   font-size: 0.75rem;
-  color: #c49e55;
+  color: #f3dfb2;
   line-height: 1;
 }
 
@@ -1904,25 +1938,29 @@ body {
   font-size: 0.62rem;
   letter-spacing: 3.5px;
   font-weight: 600;
-  color: #e5c882;
+  color: #fbf3df;
   white-space: nowrap;
   text-transform: uppercase;
 }
 
-/* 2. Cuerpo Principal en Papel Algodón Marfil */
+/* 2. Cuerpo Principal en Arena Claro & Cristal Esmerilado (Glassmorphism) */
 .ticket-main-body {
   flex: 1;
   min-width: 0;
-  padding: 20px 26px 18px;
+  padding: 18px 24px 16px;
   margin: 10px 4px 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 12px;
+  gap: 11px;
   position: relative;
-  background: #fffdf9;
-  border: 1.5px solid #d4b87a;
-  box-shadow: inset 0 0 0 4px #fffdf9, inset 0 0 0 5px rgba(196, 158, 85, 0.35);
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(255, 253, 249, 0.78) 0%, rgba(250, 244, 232, 0.58) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(201, 167, 99, 0.65);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(78, 94, 75, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 0 0 4px rgba(255, 253, 249, 0.55);
 }
 
 /* Marca de agua botánica central */
@@ -1956,8 +1994,8 @@ body {
   position: relative;
   z-index: 2;
   text-align: center;
-  border-bottom: 1px solid #eadec9;
-  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201, 167, 99, 0.35);
+  padding-bottom: 7px;
 }
 
 .ticket-crest-row {
@@ -1993,9 +2031,9 @@ body {
 .ticket-event-pre {
   display: block;
   font-family: var(--font-title);
-  font-size: 0.56rem;
-  letter-spacing: 4px;
-  color: #9e7f43;
+  font-size: 0.55rem;
+  letter-spacing: 3.8px;
+  color: #6b7c65;
   font-weight: 600;
   margin-bottom: 2px;
 }
@@ -2003,7 +2041,7 @@ body {
 .ticket-couple-names {
   font-family: var(--font-script);
   font-size: 2.95rem;
-  color: #1e261c;
+  color: #3f4f3c;
   line-height: 1.05;
   margin: 0;
   font-weight: 400;
@@ -2015,19 +2053,22 @@ body {
   padding: 0 4px;
 }
 
-/* Recuadro de Invitado y Medalla Imperial de Pases */
+/* Recuadro de Invitado y Medalla Verde Olivo (Glass Card) */
 .ticket-guest-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 14px;
-  background: linear-gradient(90deg, #f8f3e8 0%, #fdfbf6 100%);
-  border: 1px solid #dcc599;
-  border-left: 4px solid #1e261c;
-  border-radius: 6px;
-  padding: 10px 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(248, 241, 228, 0.62) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 167, 99, 0.55);
+  border-left: 4px solid #556850;
+  border-radius: 8px;
+  padding: 9px 15px;
   position: relative;
   z-index: 2;
+  box-shadow: 0 6px 18px rgba(78, 94, 75, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .ticket-field-col {
@@ -2038,7 +2079,7 @@ body {
 .field-label-small {
   display: block;
   font-family: var(--font-title);
-  font-size: 0.56rem;
+  font-size: 0.55rem;
   color: #8c6d32;
   letter-spacing: 2px;
   font-weight: 700;
@@ -2048,8 +2089,8 @@ body {
 .ticket-guest-name {
   display: block;
   font-family: var(--font-title);
-  font-size: 1.12rem;
-  color: #1e261c;
+  font-size: 1.1rem;
+  color: #394736;
   letter-spacing: 0.8px;
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -2058,12 +2099,12 @@ body {
 
 .ticket-passes-seal {
   flex-shrink: 0;
-  background: #1e261c;
-  border: 1.5px solid #c49e55;
-  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(92, 111, 86, 0.95) 0%, rgba(73, 90, 68, 0.95) 100%);
+  border: 1.5px solid #d4b475;
+  border-radius: 7px;
   padding: 6px 14px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(30, 38, 28, 0.15);
+  box-shadow: 0 4px 12px rgba(78, 94, 75, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .seal-inner {
@@ -2074,9 +2115,9 @@ body {
 
 .ticket-qty-num {
   font-family: var(--font-title);
-  font-size: 1.55rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #e5c882;
+  color: #f5e4bc;
   line-height: 1;
 }
 
@@ -2090,18 +2131,21 @@ body {
   text-align: left;
 }
 
-/* Itinerario Arquitectónico */
+/* Itinerario Arquitectónico (Glass Card) */
 .ticket-venues-grid {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
   gap: 14px;
-  background: #faf6ed;
-  border: 1px solid #e6d8be;
-  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(249, 243, 231, 0.54) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 167, 99, 0.48);
+  border-radius: 8px;
   padding: 9px 14px;
   position: relative;
   z-index: 2;
+  box-shadow: 0 6px 18px rgba(78, 94, 75, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .ticket-venue-item {
@@ -2111,7 +2155,7 @@ body {
 
 .ticket-venue-divider {
   width: 1px;
-  background: #dcc599;
+  background: rgba(196, 158, 85, 0.45);
   flex-shrink: 0;
 }
 
@@ -2132,46 +2176,51 @@ body {
 .t-badge {
   font-family: var(--font-title);
   font-size: 0.62rem;
-  letter-spacing: 1.4px;
+  letter-spacing: 1.3px;
   font-weight: 700;
-  color: #8c6d32;
+  color: #556850;
 }
 
 .t-name {
   font-size: 0.8rem;
-  color: #1e261c;
+  color: #394736;
   font-weight: 600;
   display: block;
   line-height: 1.25;
 }
 
-/* Barra Inferior de Fecha y Sede */
+/* Barra Inferior de Fecha y Sede (Verde Olivo & En una sola línea) */
 .ticket-date-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #1e261c;
-  color: #e5c882;
-  border: 1px solid #c49e55;
-  border-radius: 4px;
-  padding: 6px 12px;
+  background: linear-gradient(90deg, rgba(84, 102, 78, 0.94) 0%, rgba(97, 116, 91, 0.94) 50%, rgba(84, 102, 78, 0.94) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f5e4bc;
+  border: 1px solid #d4b475;
+  border-radius: 6px;
+  padding: 7px 10px;
   position: relative;
   z-index: 2;
+  box-shadow: 0 4px 12px rgba(78, 94, 75, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .date-pill-ornament {
-  color: #c49e55;
-  font-size: 0.68rem;
+  color: #f3dfb2;
+  font-size: 0.64rem;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .date-bar-text {
   font-family: var(--font-title);
-  font-size: 0.62rem;
-  letter-spacing: 2.2px;
-  color: #f7ebd2;
+  font-size: 0.58rem;
+  letter-spacing: 1.45px;
+  color: #fffaf0;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 /* 3. Línea de Corte Troquelada con Muescas Reales */
@@ -2196,14 +2245,14 @@ body {
 
 .notch-top {
   border-radius: 0 0 14px 14px;
-  border: 2px solid #c49e55;
+  border: 2px solid #c9a763;
   border-top: none;
   margin-top: -2px;
 }
 
 .notch-bottom {
   border-radius: 14px 14px 0 0;
-  border: 2px solid #c49e55;
+  border: 2px solid #c9a763;
   border-bottom: none;
   margin-bottom: -2px;
 }
@@ -2216,12 +2265,14 @@ body {
   opacity: 0.85;
 }
 
-/* 4. Talón Derecho VIP (Verde Bosque Profundo & Oro) */
+/* 4. Talón Derecho en Verde Olivo & Glassmorphism */
 .ticket-stub-body {
   width: 195px;
   flex: 0 0 195px;
-  background: #1e261c;
-  border-left: 1px solid rgba(196, 158, 85, 0.4);
+  background: linear-gradient(165deg, rgba(93, 112, 87, 0.94) 0%, rgba(72, 89, 67, 0.96) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-left: 1px solid rgba(212, 180, 117, 0.5);
   margin: 0;
   padding: 16px 14px;
   display: flex;
@@ -2230,8 +2281,9 @@ body {
   justify-content: space-between;
   text-align: center;
   position: relative;
+  z-index: 2;
   color: #ffffff;
-  box-shadow: inset 0 0 0 6px #1e261c, inset 0 0 0 7px rgba(229, 200, 130, 0.35);
+  box-shadow: inset 0 0 0 6px rgba(78, 95, 73, 0.6), inset 0 0 0 7px rgba(243, 223, 178, 0.38);
 }
 
 .stub-royal-header {
@@ -2262,7 +2314,7 @@ body {
   font-family: var(--font-title);
   font-size: 0.92rem;
   letter-spacing: 2px;
-  color: #e5c882;
+  color: #f6e6c2;
   font-weight: 700;
   position: relative;
   z-index: 2;
@@ -2271,21 +2323,24 @@ body {
 
 .stub-vip-sub {
   font-family: var(--font-title);
-  font-size: 0.5rem;
-  letter-spacing: 2.8px;
-  color: #c49e55;
+  font-size: 0.52rem;
+  letter-spacing: 2.6px;
+  color: #f3dfb2;
   font-weight: 600;
 }
 
 .stub-qr-frame {
-  padding: 4px;
-  border: 1px solid #c49e55;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 5px;
+  border: 1px solid rgba(243, 223, 178, 0.65);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(45, 56, 43, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .stub-qr-box {
-  background: #ffffff;
+  background: #fffdf9;
   padding: 6px;
   border-radius: 7px;
   display: flex;
@@ -2319,7 +2374,7 @@ body {
   display: block;
   font-family: var(--font-title);
   font-size: 0.5rem;
-  color: #c49e55;
+  color: #f3dfb2;
   letter-spacing: 2px;
   font-weight: 600;
 }
@@ -2336,7 +2391,7 @@ body {
   font-family: 'Libre Barcode 39', monospace;
   font-size: 1.65rem;
   line-height: 0.85;
-  color: #e5c882;
+  color: #f6e6c2;
   margin-top: 3px;
   letter-spacing: 1px;
   white-space: nowrap;
@@ -2346,9 +2401,9 @@ body {
   font-family: var(--font-title);
   font-size: 0.52rem;
   letter-spacing: 1.8px;
-  color: #e5c882;
+  color: #f6e6c2;
   font-weight: 600;
-  border-top: 1px solid rgba(229, 200, 130, 0.25);
+  border-top: 1px solid rgba(243, 223, 178, 0.3);
   padding-top: 5px;
   width: 90%;
 }
@@ -2404,7 +2459,7 @@ body {
  .ticket-modal-box { padding:48px 12px 22px; max-height:94dvh; border-radius:14px; }
  .ticket-scroll-container { overflow-x:visible; padding:4px 0 10px; }
  .wedding-ticket { width:100%; min-width:0; flex-direction:column; }
- .ticket-vip-spine { width:100%; height:34px; flex-direction:row; padding:0 14px; border-right:none; border-bottom:2px solid #c49e55; }
+ .ticket-vip-spine { width:100%; height:34px; flex-direction:row; padding:0 14px; border-right:none; border-bottom:1.5px solid #d4b475; }
  .spine-vertical-text { writing-mode:horizontal-tb; transform:none; font-size:0.58rem; letter-spacing:2.5px; }
  .ticket-main-body { margin:8px; padding:20px 14px 16px; gap:14px; }
  .ticket-vector-crest { width:46px; }
@@ -2414,10 +2469,10 @@ body {
  .ticket-guest-name { font-size:0.95rem; }
  .ticket-venues-grid { flex-direction:column; gap:10px; }
  .ticket-venue-divider { width:100%; height:1px; }
- .date-bar-text { font-size:0.54rem; letter-spacing:1.2px; }
+ .date-bar-text { font-size:0.5rem; letter-spacing:0.9px; white-space:normal; text-align:center; }
  .ticket-perforation { width:100%; height:20px; flex-direction:row; margin:0; }
- .notch-top { width:12px; height:22px; border-radius:0 12px 12px 0; border:2px solid #c49e55; border-left:none; margin-top:0; margin-left:-2px; }
- .notch-bottom { width:12px; height:22px; border-radius:12px 0 0 12px; border:2px solid #c49e55; border-right:none; margin-bottom:0; margin-right:-2px; }
+ .notch-top { width:12px; height:22px; border-radius:0 12px 12px 0; border:2px solid #c9a763; border-left:none; margin-top:0; margin-left:-2px; }
+ .notch-bottom { width:12px; height:22px; border-radius:12px 0 0 12px; border:2px solid #c9a763; border-right:none; margin-bottom:0; margin-right:-2px; }
  .perf-dots { height:0; width:auto; border-left:none; border-top:2px dashed #c49e55; margin:0 6px; }
  .ticket-stub-body { width:100%; flex:auto; padding:20px 16px; gap:12px; border-left:none; }
  .ticket-modal-actions { flex-direction:column; }
