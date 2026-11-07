@@ -1,39 +1,55 @@
-# 📋 Conexión de Confirmaciones con Google Sheets
+# 📊 Hoja de Confirmaciones (RSVP) · Alexis & Estefanía
 
-Este archivo contiene el código y los pasos para guardar automáticamente cada invitado registrado en una hoja de Google Sheets en tiempo real.
+La hoja de cálculo ya fue creada y configurada automáticamente en tu cuenta de Google Drive con diseño personalizado, cabeceras en verde olivo y dorado, y fórmulas de métricas en tiempo real.
 
----
-
-### Paso 1: Crear tu Hoja de Cálculo en Google Drive
-1. Ve a [Google Sheets (Hojas de cálculo)](https://sheets.new) y crea una hoja nueva.
-2. Nómbrala por ejemplo: `Invitados Boda Alexis y Estefanía`.
-3. En la fila 1 (los encabezados), escribe en las columnas:
-   - **Columna A:** `Fecha de Registro`
-   - **Columna B:** `Invitado / Familia`
-   - **Columna C:** `Asistencia`
-   - **Columna D:** `Pases Confirmados`
-   - **Columna E:** `Mensaje / Buenos Deseos`
-   - **Columna F:** `Código de Pase`
+🔗 **Enlace directo a tu hoja en Google Drive:**
+[Invitados Boda Alexis y Estefania](https://docs.google.com/spreadsheets/d/1EC_qJbsk1kA3BSK8ZhOIatQ1kb1-7PvY3uQQjqit0kw/edit)
 
 ---
 
-### Paso 2: Agregar el Script
-1. En tu hoja de cálculo, ve al menú superior: **Extensiones** > **Apps Script**.
-2. Borra cualquier código que aparezca y pega exactamente lo siguiente:
+### ¿Qué contiene ya tu hoja?
+1. **Pestaña "Confirmaciones":**
+   - **Columna A:** Fecha de Registro (formato fecha y hora).
+   - **Columna B:** Nombre de Invitado / Familia.
+   - **Columna C:** Asistencia (con formato condicional verde para "Sí" y rosa para "No").
+   - **Columna D:** No. Pases (conteo numérico para sumatorias automáticas).
+   - **Columna E:** Mensaje de Felicitación.
+   - **Columna F:** Código de Boleto (ejemplo: `AE-2612-4821`).
+   - Fila de encabezado congelada para desplazarse cómodamente.
+2. **Pestaña "Resumen":**
+   - **Total Registros Respondidos:** Conteo automático en vivo.
+   - **Total Personas Confirmadas (Pases):** Suma matemática en vivo de boletos reservados.
+   - **Total que No Asistirán:** Conteo automático de declinaciones.
+   - **Promedio de Pases por Invitado:** Cálculo en tiempo real.
+
+---
+
+### Paso Único: Activar la conexión Web en 1 minuto
+
+Para que la página web pueda enviar los datos a tu hoja sin pedirle contraseñas a los invitados:
+
+1. Abre tu hoja en Google Sheets:
+   👉 **[Clic aquí para abrir la hoja](https://docs.google.com/spreadsheets/d/1EC_qJbsk1kA3BSK8ZhOIatQ1kb1-7PvY3uQQjqit0kw/edit)**
+2. En el menú superior, haz clic en **Extensiones** > **Apps Script**.
+3. Borra el código que aparezca y pega exactamente este bloque:
 
 ```javascript
 function doPost(e) {
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName("Confirmaciones") || ss.getSheets()[0];
     var data = JSON.parse(e.postData.contents);
+    
+    var isYes = data.attendance === "Confirmado" || data.attendance === "si";
+    var passCount = isYes ? Number(data.guestCount || 1) : 0;
     
     sheet.appendRow([
       data.timestamp || new Date().toLocaleString("es-MX"),
-      data.guestName || "N/A",
-      data.attendance || "Confirmado",
-      data.guestCount || "1",
+      data.guestName || "Invitado",
+      isYes ? "Sí, asistiré con gusto" : "No podré asistir",
+      passCount,
       data.guestMessage || "",
-      data.ticketCode || "N/A"
+      isYes ? (data.ticketCode || "N/A") : "N/A"
     ]);
     
     return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
@@ -45,25 +61,14 @@ function doPost(e) {
 }
 ```
 
----
-
-### Paso 3: Publicar como Web App
-1. Arriba a la derecha, haz clic en el botón azul **Implementar** > **Nueva implementación**.
-2. En el engrane ⚙️ de la izquierda (Seleccionar tipo), elige: **Aplicación web**.
-3. Configura:
+4. Arriba a la derecha, haz clic en el botón azul **Implementar** > **Nueva implementación**.
+5. En el icono de engranaje ⚙️ (Seleccionar tipo), elige **Aplicación web**.
+6. Configura únicamente estos 3 campos:
    - **Descripción:** `RSVP Boda`
    - **Ejecutar como:** `Yo (tu correo)`
-   - **Quién tiene acceso:** `Cualquiera` (¡Muy importante para que la web pueda enviar datos sin pedir login!).
-4. Haz clic en **Implementar**.
-5. Copia la **URL de la aplicación web** generada (empieza con `https://script.google.com/macros/s/.../exec`).
+   - **Quién tiene acceso:** `Cualquiera` *(imprescindible para que el formulario de la web pueda registrar a los invitados)*.
+7. Haz clic en **Implementar** y luego en **Autorizar acceso** (seleccionas tu cuenta).
+8. Copia la **URL de la aplicación web** (inicia con `https://script.google.com/macros/s/.../exec`).
+9. Pásame esa URL aquí en el chat (o pégala en `script.js` en la línea `const GOOGLE_SHEETS_SCRIPT_URL = "...";`).
 
----
-
-### Paso 4: Conectar con tu Invitación
-Abre el archivo `script.js` en tu proyecto y en la línea 17 pega tu URL:
-
-```javascript
-const GOOGLE_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/TU_CODIGO_AQUI/exec";
-```
-
-¡Y listo! Cada vez que un invitado confirme su asistencia y descargue su pase, aparecerá al instante en tu Excel de Google Drive.
+¡Y listo! Todo quedará enlazado en tiempo real.
