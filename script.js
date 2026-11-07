@@ -44,52 +44,105 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 2. REPRODUCTOR DE MÚSICA & ONDAS SONORAS
+  // 2. REPRODUCTOR DE MÚSICA & CONTROL DE VOLUMEN DISCRETO
   // ==========================================
   const audio = document.getElementById('weddingAudio');
   const musicBtn = document.getElementById('musicToggleBtn');
   const musicLabel = document.getElementById('musicLabel');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const volumeMuteBtn = document.getElementById('volumeMuteBtn');
+  const volumeIcon = document.getElementById('volumeIcon');
 
-  if (musicBtn && audio) {
-    let isPlaying = false;
+  if (audio) {
+    // Volumen sutil y agradable por defecto (22%)
+    const DEFAULT_VOLUME = 0.22;
+    audio.volume = DEFAULT_VOLUME;
+    if (volumeSlider) volumeSlider.value = DEFAULT_VOLUME;
 
-    function playAudio() {
-      audio.play().then(() => {
-        isPlaying = true;
-        musicBtn.classList.add('playing');
-        if (musicLabel) musicLabel.textContent = 'Pausar';
-      }).catch(err => {
-        console.log('Autoplay bloqueado por el navegador (requiere interacción del usuario):', err);
+    let previousVolume = DEFAULT_VOLUME;
+
+    function updateVolumeIcon(vol) {
+      if (!volumeIcon) return;
+      if (vol === 0) {
+        // Icono Silenciado
+        volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
+      } else if (vol < 0.5) {
+        // Icono Volumen Bajo
+        volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
+      } else {
+        // Icono Volumen Alto
+        volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
+      }
+    }
+
+    if (volumeSlider) {
+      volumeSlider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        audio.volume = val;
+        if (val > 0) previousVolume = val;
+        updateVolumeIcon(val);
       });
     }
 
-    function pauseAudio() {
-      audio.pause();
-      isPlaying = false;
-      musicBtn.classList.remove('playing');
-      if (musicLabel) musicLabel.textContent = 'Música';
+    if (volumeMuteBtn) {
+      volumeMuteBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (audio.volume > 0) {
+          previousVolume = audio.volume;
+          audio.volume = 0;
+          if (volumeSlider) volumeSlider.value = 0;
+          updateVolumeIcon(0);
+        } else {
+          const restoreVol = previousVolume > 0 ? previousVolume : DEFAULT_VOLUME;
+          audio.volume = restoreVol;
+          if (volumeSlider) volumeSlider.value = restoreVol;
+          updateVolumeIcon(restoreVol);
+        }
+      });
     }
 
-    musicBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (isPlaying) {
-        pauseAudio();
-      } else {
-        playAudio();
-      }
-    });
+    if (musicBtn) {
+      let isPlaying = false;
 
-    // Iniciar suavemente al primer clic en cualquier lugar si aún no está sonando
-    const startAudioOnFirstTouch = () => {
-      if (!isPlaying) {
-        playAudio();
+      function playAudio() {
+        audio.play().then(() => {
+          isPlaying = true;
+          musicBtn.classList.add('playing');
+          if (musicLabel) musicLabel.textContent = 'Pausar';
+        }).catch(err => {
+          console.log('Autoplay bloqueado por el navegador (requiere interacción del usuario):', err);
+        });
       }
-      document.removeEventListener('click', startAudioOnFirstTouch);
-      document.removeEventListener('touchstart', startAudioOnFirstTouch);
-    };
 
-    document.addEventListener('click', startAudioOnFirstTouch, { once: true });
-    document.addEventListener('touchstart', startAudioOnFirstTouch, { once: true });
+      function pauseAudio() {
+        audio.pause();
+        isPlaying = false;
+        musicBtn.classList.remove('playing');
+        if (musicLabel) musicLabel.textContent = 'Música';
+      }
+
+      musicBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isPlaying) {
+          pauseAudio();
+        } else {
+          playAudio();
+        }
+      });
+
+      // Iniciar suavemente al primer clic en cualquier lugar si aún no está sonando
+      const startAudioOnFirstTouch = () => {
+        if (!isPlaying) {
+          playAudio();
+        }
+        document.removeEventListener('click', startAudioOnFirstTouch);
+        document.removeEventListener('touchstart', startAudioOnFirstTouch);
+      };
+
+      document.addEventListener('click', startAudioOnFirstTouch, { once: true });
+      document.addEventListener('touchstart', startAudioOnFirstTouch, { once: true });
+    }
   }
 
 
@@ -229,45 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  // Copiar datos bancarios
-  const copyClabeBtn = document.getElementById('copyClabeBtn');
-  const copyAllBankBtn = document.getElementById('copyAllBankBtn');
-  const clabeCode = document.getElementById('clabeCode');
-  const copyFeedback = document.getElementById('copyFeedback');
-
-  function showCopyFeedback(msg = "✓ ¡Copiado con éxito!") {
-    if (copyFeedback) {
-      copyFeedback.textContent = msg;
-      copyFeedback.style.display = 'block';
-      setTimeout(() => {
-        copyFeedback.style.display = 'none';
-      }, 3500);
-    }
-  }
-
-  if (copyClabeBtn && clabeCode) {
-    copyClabeBtn.addEventListener('click', () => {
-      const text = clabeCode.textContent.trim();
-      navigator.clipboard.writeText(text).then(() => {
-        showCopyFeedback("✓ ¡CLABE copiada al portapapeles!");
-      }).catch(err => {
-        console.error('Error al copiar:', err);
-      });
-    });
-  }
-
-  if (copyAllBankBtn) {
-    copyAllBankBtn.addEventListener('click', () => {
-      const bankDetailsText = `DATOS PARA TRANSFERENCIA · BODA ALEXIS & ESTEFANÍA\nBanco: BBVA\nBeneficiario: Alexis & Estefanía\nCLABE Interbancaria: ${clabeCode ? clabeCode.textContent.trim() : '012345678901234567'}`;
-      navigator.clipboard.writeText(bankDetailsText).then(() => {
-        showCopyFeedback("✓ ¡Todos los datos bancarios copiados!");
-      }).catch(err => {
-        console.error('Error al copiar:', err);
-      });
-    });
-  }
-
 
   // ==========================================
   // 7. FORMULARIO RSVP INTELIGENTE & WHATSAPP

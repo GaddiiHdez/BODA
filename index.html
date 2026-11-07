@@ -25,21 +25,36 @@
 </head>
 <body>
 
-  <!-- ================= REPRODUCTOR FLOTANTE DE AUDIO ================= -->
+  <!-- ================= REPRODUCTOR FLOTANTE DE AUDIO CON CONTROL DE VOLUMEN ================= -->
   <div class="music-pill-widget" id="musicWidget">
-    <button class="music-btn" id="musicToggleBtn" aria-label="Reproducir o pausar música">
-      <div class="sound-bars">
-        <span class="bar bar-1"></span>
-        <span class="bar bar-2"></span>
-        <span class="bar bar-3"></span>
-        <span class="bar bar-4"></span>
+    <div class="music-capsule">
+      <button class="music-btn" id="musicToggleBtn" aria-label="Reproducir o pausar música">
+        <div class="sound-bars">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+          <span class="bar bar-4"></span>
+        </div>
+        <span class="music-label" id="musicLabel">Nuestra Canción</span>
+      </button>
+
+      <div class="volume-control-wrap" id="volumeControlWrap">
+        <button class="volume-btn" id="volumeMuteBtn" aria-label="Silenciar o activar sonido" title="Control de volumen">
+          <svg id="volumeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+        <div class="volume-slider-box">
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.02" value="0.25" class="volume-slider" aria-label="Control de volumen">
+        </div>
       </div>
-      <span class="music-label" id="musicLabel">Nuestra Canción</span>
-    </button>
+    </div>
   </div>
 
-  <audio id="weddingAudio" loop preload="none">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mp3">
+  <audio id="weddingAudio" loop preload="auto">
+    <source src="music/01 - All of Me.m4a" type="audio/mp4">
+    <source src="music/01 - All of Me.m4a" type="audio/aac">
   </audio>
 
   <!-- ================= HERO SECTION CINEMÁTICO ================= -->
@@ -360,14 +375,14 @@
           <span class="line"></span>
         </div>
         <p class="gifts-intro-text">
-          Si deseas honrarnos con un detalle para ayudarnos a comenzar nuestro nuevo hogar y luna de miel, ponemos a tu disposición las siguientes opciones:
+          Si deseas honrarnos con un detalle para ayudarnos a comenzar nuestro nuevo hogar y luna de miel, ponemos a tu disposición nuestra mesa de regalos en Liverpool:
         </p>
       </div>
 
       <div class="gifts-grid">
         
-        <!-- OPCIÓN 1: LIVERPOOL -->
-        <div class="gift-option-card reveal fade-right">
+        <!-- OPCIÓN: LIVERPOOL -->
+        <div class="gift-option-card reveal fade-up">
           <div class="gift-card-badge store-badge">TIENDAS &amp; ONLINE</div>
           <div class="gift-card-icon">🛍️</div>
           <h3 class="gift-card-title">Liverpool</h3>
@@ -391,70 +406,6 @@
             <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/60058466" target="_blank" class="btn btn-gold btn-full" id="liverpoolBtn">
               Ver Mesa en Liverpool
             </a>
-          </div>
-        </div>
-
-        <!-- OPCIÓN 2: AMAZON BODAS & TARJETAS DE REGALO (OCULTO TEMPORALMENTE) -->
-        <!--
-        <div class="gift-option-card reveal fade-up">
-          <div class="gift-card-badge amazon-badge">ENVÍO A DOMICILIO</div>
-          <div class="gift-card-icon">📦</div>
-          <h3 class="gift-card-title">Amazon Bodas</h3>
-          <p class="gift-card-desc">
-            Encuentra nuestra lista de artículos seleccionados o envíanos una tarjeta de regalo digital de Amazon directo a nuestro correo:
-          </p>
-
-          <div class="gift-card-tags">
-            <span class="tag-pill">✓ Artículos para el hogar</span>
-            <span class="tag-pill">✓ Tarjetas de Regalo</span>
-          </div>
-
-          <div class="gift-card-footer">
-            <a href="https://www.amazon.com.mx/baby-reg/homepage" target="_blank" class="btn btn-gold btn-full" id="amazonBtn">
-              Ver Mesa en Amazon
-            </a>
-            <a href="https://www.amazon.com.mx/b?node=11894957011" target="_blank" class="btn btn-secondary-soft btn-full" style="margin-top: 8px;">
-              🎁 Tarjetas de Regalo Amazon
-            </a>
-          </div>
-        </div>
-        -->
-
-        <!-- OPCIÓN 3: TRANSFERENCIA BANCARIA -->
-        <div class="gift-option-card bank-luxury-card reveal fade-left">
-          <div class="gift-card-badge gold-badge">TRANSFERENCIA</div>
-          <div class="gift-card-icon">💳</div>
-          <h3 class="gift-card-title">Transferencia Digital</h3>
-          <p class="gift-card-desc">
-            Si prefieres hacernos llegar un presente por transferencia o depósito bancario:
-          </p>
-          
-          <div class="bank-details-card">
-            <div class="bank-field">
-              <span class="field-label">Banco:</span>
-              <strong class="field-val">BBVA</strong>
-            </div>
-            <div class="bank-field">
-              <span class="field-label">Beneficiario:</span>
-              <strong class="field-val">Alexis &amp; Estefanía</strong>
-            </div>
-            <div class="bank-field clabe-field">
-              <span class="field-label">CLABE Interbancaria:</span>
-              <div class="clabe-copy-box">
-                <code class="clabe-number" id="clabeCode">012345678901234567</code>
-                <button class="btn-copy-chip" id="copyClabeBtn" title="Copiar CLABE">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span>Copiar</span>
-                </button>
-              </div>
-            </div>
-            <div class="copy-toast" id="copyFeedback">✓ ¡CLABE copiada al portapapeles!</div>
-          </div>
-
-          <div class="gift-card-footer">
-            <button class="btn btn-outline-gold btn-full" id="copyAllBankBtn">
-              📋 Copiar Todos los Datos
-            </button>
           </div>
         </div>
 
