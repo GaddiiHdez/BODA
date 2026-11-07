@@ -349,10 +349,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Generador de código aleatorio único de pase
+    // Generador de código alfanumérico estilo gala VIP (Ej: AE-26DEC-7K9A)
   function generateTicketCode() {
-    const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    return `AE-2612-${randomDigits}`;
+    const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    let randomSuffix = '';
+    for (let i = 0; i < 4; i++) {
+      randomSuffix += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return 'AE-26DEC-' + randomSuffix;
   }
 
   // Enviar a Google Sheets en tiempo real
