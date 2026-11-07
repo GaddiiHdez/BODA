@@ -1594,19 +1594,19 @@ body {
 }
 
 /* ========================================================
-   DISEÑO DEL BOLETO DE GALA (TICKET IMPRESO / PDF)
+   DISEÑO DEL BOLETO DE GALA (FLAT DESIGN & ILUSTRACIONES VECTORIALES)
 ======================================================== */
 .wedding-ticket {
-  width: 720px;
-  min-width: 720px;
-  height: 275px;
+  width: 740px;
+  min-width: 740px;
+  height: 300px;
   margin: 0 auto;
   display: flex;
   background: #fffefb;
-  border: 2px solid #dcd1be;
+  border: 2px solid #c9b99f;
   border-radius: 14px;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 45px rgba(35, 45, 33, 0.12);
   text-align: left;
   box-sizing: border-box;
   overflow: hidden;
@@ -1615,87 +1615,118 @@ body {
 /* Cuerpo principal */
 .ticket-main-body {
   flex: 1;
-  padding: 18px 24px;
+  padding: 16px 22px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-right: none;
+  position: relative;
+  border: 1px solid rgba(196, 158, 85, 0.45);
+  margin: 8px 0 8px 8px;
+  border-radius: 8px;
+  background: #fffefb;
 }
+
+/* Esquinas botánicas flat design (estilo ilustrador) */
+.ticket-corner-vector {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.corner-tl { top: 4px; left: 4px; }
+.corner-tr { top: 4px; right: 4px; transform: scaleX(-1); }
+.corner-bl { bottom: 4px; left: 4px; transform: scaleY(-1); }
+.corner-br { bottom: 4px; right: 4px; transform: scale(-1); }
 
 .ticket-top-brand {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #efe8db;
-  padding-bottom: 6px;
+  border-bottom: 1px solid #ede5d7;
+  padding-bottom: 4px;
+  position: relative;
+  z-index: 2;
 }
 
 .ticket-badge-tag {
   font-family: var(--font-title);
-  font-size: 0.62rem;
-  letter-spacing: 2px;
+  font-size: 0.6rem;
+  letter-spacing: 2.2px;
   color: var(--gold-primary);
   font-weight: 600;
 }
 
-.ticket-garland-mini {
-  height: 20px;
+.ticket-vector-crest {
+  height: 18px;
   width: auto;
-  opacity: 0.75;
+  max-width: 220px;
 }
 
 .ticket-couple {
+  text-align: center;
   margin: 2px 0;
+  position: relative;
+  z-index: 2;
 }
 
 .ticket-couple-names {
   font-family: var(--font-script);
-  font-size: 2.3rem;
+  font-size: 2.4rem;
   color: var(--olive-dark);
   line-height: 1;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
+  letter-spacing: 0.5px;
 }
 
 .ticket-event-label {
   font-family: var(--font-title);
-  font-size: 0.64rem;
-  letter-spacing: 3px;
-  color: var(--text-muted);
+  font-size: 0.62rem;
+  letter-spacing: 4px;
+  color: var(--gold-primary);
+  font-weight: 600;
 }
 
 .ticket-guest-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fbf9f5;
-  border: 1px solid #ede5d7;
+  background: #faf7f0;
+  border: 1px solid #e7ddcd;
   border-radius: 8px;
-  padding: 8px 14px;
+  padding: 7px 14px;
+  position: relative;
+  z-index: 2;
 }
 
 .field-label-small {
   display: block;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
+  font-family: var(--font-title);
+  font-size: 0.6rem;
+  color: var(--gold-primary);
+  letter-spacing: 1.5px;
+  font-weight: 600;
 }
 
 .ticket-guest-name {
   font-family: var(--font-title);
   font-size: 1.05rem;
   color: var(--olive-dark);
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
+  font-weight: 600;
 }
 
 .ticket-passes-badge {
   text-align: right;
   border-left: 1px solid #e5dcce;
-  padding-left: 12px;
+  padding-left: 14px;
 }
 
 .ticket-qty-num {
   font-family: var(--font-title);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--gold-primary);
   line-height: 1;
@@ -1703,25 +1734,42 @@ body {
 }
 
 .ticket-qty-label {
-  font-size: 0.58rem;
-  letter-spacing: 1px;
+  font-size: 0.56rem;
+  letter-spacing: 1.2px;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .ticket-venues-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
   background: #ffffff;
   border-radius: 6px;
-  padding: 6px 10px;
-  border: 1px solid #f2ece1;
+  padding: 6px 12px;
+  border: 1px solid #f0e8db;
+  position: relative;
+  z-index: 2;
+}
+
+.t-venue-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.t-venue-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--gold-primary);
+  flex-shrink: 0;
 }
 
 .t-badge {
-  display: block;
+  font-family: var(--font-title);
   font-size: 0.62rem;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   font-weight: 600;
   color: var(--olive-primary);
 }
@@ -1738,14 +1786,16 @@ body {
 
 .ticket-date-bar {
   text-align: center;
-  border-top: 1px solid #efe8db;
-  padding-top: 5px;
+  border-top: 1px solid #ede5d7;
+  padding-top: 4px;
+  position: relative;
+  z-index: 2;
 }
 
 .ticket-date-bar span {
   font-family: var(--font-title);
-  font-size: 0.7rem;
-  letter-spacing: 3px;
+  font-size: 0.68rem;
+  letter-spacing: 2.8px;
   color: var(--olive-dark);
   font-weight: 600;
 }
@@ -1758,33 +1808,34 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin: 8px 0;
 }
 
 .notch {
   width: 22px;
-  height: 11px;
+  height: 12px;
   background: #ffffff;
   position: relative;
   z-index: 5;
 }
 
 .notch-top {
-  border-radius: 0 0 11px 11px;
-  border: 2px solid #dcd1be;
+  border-radius: 0 0 12px 12px;
+  border: 2px solid #c9b99f;
   border-top: none;
-  margin-top: -2px;
+  margin-top: -10px;
 }
 
 .notch-bottom {
-  border-radius: 11px 11px 0 0;
-  border: 2px solid #dcd1be;
+  border-radius: 12px 12px 0 0;
+  border: 2px solid #c9b99f;
   border-bottom: none;
-  margin-bottom: -2px;
+  margin-bottom: -10px;
 }
 
 .perf-dots {
   flex: 1;
-  border-left: 2px dashed #c8bcab;
+  border-left: 2px dashed #baa88c;
   width: 0;
   margin: 3px 0;
 }
@@ -1792,47 +1843,81 @@ body {
 /* Talón derecho (Stub) */
 .ticket-stub-body {
   width: 175px;
-  background: #fbf9f4;
-  border-left: none;
-  padding: 16px 14px;
+  background: #fcf9f2;
+  border: 1px dashed rgba(196, 158, 85, 0.45);
+  border-radius: 8px;
+  margin: 8px 8px 8px 0;
+  padding: 12px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   text-align: center;
+  position: relative;
+}
+
+.stub-wreath-wrap {
+  position: relative;
+  width: 60px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stub-wreath-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .stub-brand {
   font-family: var(--font-title);
   font-size: 0.95rem;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: var(--gold-primary);
   font-weight: 700;
+  position: relative;
+  z-index: 2;
 }
 
 .stub-qr-box {
   background: #ffffff;
   padding: 6px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #e3dacd;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.stub-qr-img {
-  width: 85px;
-  height: 85px;
+.stub-qr-render-area {
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stub-qr-render-area canvas, .stub-qr-render-area img {
+  width: 86px !important;
+  height: 86px !important;
   display: block;
 }
 
 .stub-meta {
-  margin: 4px 0;
+  margin: 2px 0;
 }
 
 .stub-label {
   display: block;
-  font-size: 0.58rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
+  font-family: var(--font-title);
+  font-size: 0.56rem;
+  color: var(--gold-primary);
+  letter-spacing: 1.5px;
+  font-weight: 600;
 }
 
 .stub-code {
@@ -1847,6 +1932,7 @@ body {
   font-size: 0.58rem;
   letter-spacing: 1.5px;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* Botones del modal */

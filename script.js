@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ticketGuestName = document.getElementById('ticketGuestName');
   const ticketPassesQty = document.getElementById('ticketPassesQty');
   const ticketCodeDisplay = document.getElementById('ticketCodeDisplay');
-  const ticketQrImage = document.getElementById('ticketQrImage');
+  const ticketQrContainer = document.getElementById('ticketQrContainer');
   const downloadTicketPdfBtn = document.getElementById('downloadTicketPdfBtn');
   const ticketWhatsAppBtn = document.getElementById('ticketWhatsAppBtn');
 
@@ -391,9 +391,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ticketGuestName) ticketGuestName.textContent = guestName;
         if (ticketPassesQty) ticketPassesQty.textContent = guestCount;
         if (ticketCodeDisplay) ticketCodeDisplay.textContent = ticketCode;
-        if (ticketQrImage) {
-          const qrPayload = encodeURIComponent(`PASE BODA ALEXIS & ESTEFANIA\nInvitado: ${guestName}\nPases: ${guestCount}\nCodigo: ${ticketCode}`);
-          ticketQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=2d382b&bgcolor=ffffff&data=${qrPayload}`;
+
+        // Renderizar Código QR de alta precisión localmente (Vector/Canvas offline)
+        if (ticketQrContainer) {
+          ticketQrContainer.innerHTML = '';
+          const qrText = `PASE BODA ALEXIS & ESTEFANIA\nInvitado: ${guestName}\nPases: ${guestCount}\nCodigo: ${ticketCode}`;
+          
+          if (typeof QRCode !== 'undefined') {
+            try {
+              new QRCode(ticketQrContainer, {
+                text: qrText,
+                width: 86,
+                height: 86,
+                colorDark: "#2d382b",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
+              });
+            } catch (qrErr) {
+              console.warn('Error con QRCode local, usando fallback:', qrErr);
+              const encoded = encodeURIComponent(qrText);
+              ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=2d382b&bgcolor=ffffff&data=${encoded}" style="width:86px;height:86px;" crossorigin="anonymous">`;
+            }
+          } else {
+            const encoded = encodeURIComponent(qrText);
+            ticketQrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&color=2d382b&bgcolor=ffffff&data=${encoded}" style="width:86px;height:86px;" crossorigin="anonymous">`;
+          }
         }
 
         // Configurar botón de WhatsApp dentro del modal
@@ -401,22 +423,100 @@ document.addEventListener('DOMContentLoaded', () => {
           ticketWhatsAppBtn.onclick = () => window.open(whatsappUrl, '_blank');
         }
 
-        // Configurar descarga de PDF del boleto
+        // Configurar descarga de PDF del boleto (Aislado de fixed modal para evitar páginas en blanco)
         if (downloadTicketPdfBtn) {
-          downloadTicketPdfBtn.onclick = () => {
+          downloadTicketPdfBtn.onclick = async () => {
             const ticketElement = document.getElementById('weddingTicket');
-            if (typeof html2pdf !== 'undefined' && ticketElement) {
+            if (!ticketElement) return;
+
+            const originalBtnHtml = downloadTicketPdfBtn.innerHTML;
+            downloadTicketPdfBtn.disabled = true;
+            downloadTicketPdfBtn.innerHTML = `<span>⏳ Generando Boleto en PDF...</span>`;
+
+            try {
+              // 1. Clonar el elemento del boleto para aislarlo de modal fijo, scrollbars y transformaciones CSS
+              const clone = ticketElement.cloneNode(true);
+              clone.id = 'weddingTicketPdfClone';
+
+              // Copiar el contenido exacto del QR (canvas/img) del original al clon
+              const liveQr = ticketElement.querySelector('.stub-qr-render-area');
+              const cloneQr = clone.querySelector('.stub-qr-render-area');
+              if (liveQr && cloneQr) {
+                cloneQr.innerHTML = liveQr.innerHTML;
+                const liveCanvas = liveQr.querySelector('canvas');
+                const cloneCanvas = cloneQr.querySelector('canvas');
+                if (liveCanvas && cloneCanvas) {
+                  const ctx = cloneCanvas.getContext('2d');
+                  ctx.drawImage(liveCanvas, 0, 0);
+                }
+              }
+
+              // 2. Montar el clon en un contenedor temporal en coordenadas raíz absolutas
+              const staging = document.createElement('div');
+              staging.style.position = 'absolute';
+              staging.style.top = '0px';
+              staging.style.left = '0px';
+              staging.style.width = '740px';
+              staging.style.height = '300px';
+              staging.style.zIndex = '-99999';
+              staging.style.opacity = '1';
+              staging.style.background = '#ffffff';
+              staging.style.pointerEvents = 'none';
+              staging.style.margin = '0';
+              staging.style.padding = '0';
+              staging.style.transform = 'none';
+
+              clone.style.margin = '0';
+              clone.style.transform = 'none';
+              staging.appendChild(clone);
+              document.body.appendChild(staging);
+
+              // 3. Opciones de exportación exacta: 210mm x 85mm horizontal (formato boleto real sin saltos de página)
               const cleanFileName = `Pase_Boda_Alexis_y_Estefania_${guestName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
-              const opt = {
-                margin: [10, 10, 10, 10],
-                filename: cleanFileName,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2.5, useCORS: true, logging: false },
-                jsPDF: { unit: 'mm', format: [210, 95], orientation: 'landscape' }
-              };
-              html2pdf().set(opt).from(ticketElement).save();
-            } else {
-              window.print();
+              
+              if (typeof html2pdf !== 'undefined') {
+                const opt = {
+                  margin: 0,
+                  filename: cleanFileName,
+                  image: { type: 'jpeg', quality: 0.98 },
+                  html2canvas: {
+                    scale: 2.5,
+                    useCORS: true,
+                    logging: false,
+                    scrollX: 0,
+                    scrollY: 0,
+                    windowWidth: 740,
+                    windowHeight: 300,
+                    backgroundColor: '#fffefb'
+                  },
+                  jsPDF: {
+                    unit: 'mm',
+                    format: [210, 85],
+                    orientation: 'landscape'
+                  }
+                };
+
+                await html2pdf().set(opt).from(clone).save();
+              } else {
+                window.print();
+              }
+
+              // Limpiar contenedor staging
+              if (staging.parentNode) {
+                staging.parentNode.removeChild(staging);
+              }
+
+              downloadTicketPdfBtn.innerHTML = `<span>✓ ¡Boleto Descargado!</span>`;
+              setTimeout(() => {
+                downloadTicketPdfBtn.innerHTML = originalBtnHtml;
+                downloadTicketPdfBtn.disabled = false;
+              }, 3000);
+
+            } catch (err) {
+              console.error('Error generando PDF:', err);
+              alert('Hubo un detalle al descargar el PDF. Puedes tomar captura de pantalla a tu boleto.');
+              downloadTicketPdfBtn.innerHTML = originalBtnHtml;
+              downloadTicketPdfBtn.disabled = false;
             }
           };
         }
