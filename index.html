@@ -239,7 +239,7 @@
     <div class="section-container">
       <div class="editorial-photo-card reveal zoom-in">
         <div class="photo-container">
-          <img src="img/hero_optimized.jpg" alt="Alexis y Estefanía" class="editorial-img">
+          <img src="img/abrazo_playa.jpg" alt="Alexis y Estefanía - Abrazo al atardecer" class="editorial-img">
           <div class="photo-overlay-caption">
             <p class="caption-tag">NUESTRA HISTORIA</p>
             <h3 class="caption-title">"El destino nos unió, pero el amor nos mantendrá juntos por siempre."</h3>
@@ -270,26 +270,65 @@
 
       <div class="gifts-grid">
         
-        <!-- OPCIÓN 1: LLUVIA DE SOBRES -->
+        <!-- OPCIÓN 1: LIVERPOOL -->
         <div class="gift-option-card reveal fade-right">
-          <div class="gift-card-badge">PRESENCIAL</div>
-          <div class="gift-card-icon">✉️</div>
-          <h3 class="gift-card-title">Lluvia de Sobres</h3>
+          <div class="gift-card-badge store-badge">TIENDAS &amp; ONLINE</div>
+          <div class="gift-card-icon">🛍️</div>
+          <h3 class="gift-card-title">Liverpool</h3>
           <p class="gift-card-desc">
-            Dispondremos de un cofre especial y sobres en la entrada de la recepción para recibir tus buenos deseos y presente en efectivo.
+            Puedes elegir un regalo o abonar a nuestro monedero en cualquier sucursal del país o en su tienda en línea con nuestro número de evento:
           </p>
+
+          <div class="event-number-box">
+            <span class="event-label">Número de Evento:</span>
+            <div class="event-code-wrap">
+              <strong class="event-code" id="liverpoolEventCode">51234567</strong>
+              <button class="btn-copy-chip" id="copyLiverpoolBtn" title="Copiar número de evento">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copiar</span>
+              </button>
+            </div>
+            <span class="copy-toast" id="liverpoolFeedback">✓ ¡Número de evento copiado!</span>
+          </div>
+
           <div class="gift-card-footer">
-            <span class="gift-location-tag">📍 Casino El Campesino</span>
+            <a href="https://mesaderegalos.liverpool.com.mx/" target="_blank" class="btn btn-gold btn-full" id="liverpoolBtn">
+              Ver Mesa en Liverpool
+            </a>
           </div>
         </div>
 
-        <!-- OPCIÓN 2: TRANSFERENCIA BANCARIA -->
+        <!-- OPCIÓN 2: AMAZON BODAS & TARJETAS DE REGALO -->
+        <div class="gift-option-card reveal fade-up">
+          <div class="gift-card-badge amazon-badge">ENVÍO A DOMICILIO</div>
+          <div class="gift-card-icon">📦</div>
+          <h3 class="gift-card-title">Amazon Bodas</h3>
+          <p class="gift-card-desc">
+            Encuentra nuestra lista de artículos seleccionados o envíanos una tarjeta de regalo digital de Amazon directo a nuestro correo:
+          </p>
+
+          <div class="gift-card-tags">
+            <span class="tag-pill">✓ Artículos para el hogar</span>
+            <span class="tag-pill">✓ Tarjetas de Regalo</span>
+          </div>
+
+          <div class="gift-card-footer">
+            <a href="https://www.amazon.com.mx/baby-reg/homepage" target="_blank" class="btn btn-gold btn-full" id="amazonBtn">
+              Ver Mesa en Amazon
+            </a>
+            <a href="https://www.amazon.com.mx/b?node=11894957011" target="_blank" class="btn btn-secondary-soft btn-full" style="margin-top: 8px;">
+              🎁 Tarjetas de Regalo Amazon
+            </a>
+          </div>
+        </div>
+
+        <!-- OPCIÓN 3: TRANSFERENCIA BANCARIA -->
         <div class="gift-option-card bank-luxury-card reveal fade-left">
           <div class="gift-card-badge gold-badge">TRANSFERENCIA</div>
           <div class="gift-card-icon">💳</div>
           <h3 class="gift-card-title">Transferencia Digital</h3>
           <p class="gift-card-desc">
-            Si prefieres realizar una transferencia bancaria desde tu aplicación móvil:
+            Si prefieres hacernos llegar un presente por transferencia o depósito bancario:
           </p>
           
           <div class="bank-details-card">
@@ -306,7 +345,7 @@
               <div class="clabe-copy-box">
                 <code class="clabe-number" id="clabeCode">012345678901234567</code>
                 <button class="btn-copy-chip" id="copyClabeBtn" title="Copiar CLABE">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                   <span>Copiar</span>
                 </button>
               </div>
@@ -314,11 +353,18 @@
             <div class="copy-toast" id="copyFeedback">✓ ¡CLABE copiada al portapapeles!</div>
           </div>
 
-          <button class="btn btn-outline-gold btn-full" id="copyAllBankBtn">
-            📋 Copiar Todos los Datos Bancarios
-          </button>
+          <div class="gift-card-footer">
+            <button class="btn btn-outline-gold btn-full" id="copyAllBankBtn">
+              📋 Copiar Todos los Datos
+            </button>
+          </div>
         </div>
 
+      </div>
+
+      <!-- Nota sutil de lluvia de sobres -->
+      <div class="envelope-courtesy-note reveal fade-up">
+        <span>✉️ También contaremos con un buzón para sobres y buenos deseos en la recepción en <strong>Casino El Campesino</strong>.</span>
       </div>
 
     </div>

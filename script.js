@@ -204,8 +204,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. SISTEMA MEJORADO DE DATOS BANCARIOS (1-CLIC)
+  // 6. SISTEMA MEJORADO DE MESA DE REGALOS (1-CLIC)
   // ==========================================
+  // Copiar número de evento de Liverpool
+  const copyLiverpoolBtn = document.getElementById('copyLiverpoolBtn');
+  const liverpoolEventCode = document.getElementById('liverpoolEventCode');
+  const liverpoolFeedback = document.getElementById('liverpoolFeedback');
+
+  if (copyLiverpoolBtn && liverpoolEventCode) {
+    copyLiverpoolBtn.addEventListener('click', () => {
+      const code = liverpoolEventCode.textContent.trim();
+      navigator.clipboard.writeText(code).then(() => {
+        if (liverpoolFeedback) {
+          liverpoolFeedback.style.display = 'block';
+          setTimeout(() => {
+            liverpoolFeedback.style.display = 'none';
+          }, 3500);
+        }
+      }).catch(err => {
+        console.error('Error al copiar evento de Liverpool:', err);
+      });
+    });
+  }
+
+  // Copiar datos bancarios
   const copyClabeBtn = document.getElementById('copyClabeBtn');
   const copyAllBankBtn = document.getElementById('copyAllBankBtn');
   const clabeCode = document.getElementById('clabeCode');

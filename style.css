@@ -767,15 +767,9 @@ body {
   height: 100%;
   max-height: 550px;
   object-fit: cover;
-  object-position: 62% 20%;
+  object-position: center center;
   display: block;
   transition: transform 0.8s ease;
-}
-
-@media (min-width: 900px) {
-  .editorial-img {
-    object-position: center center;
-  }
 }
 
 .editorial-photo-card:hover .editorial-img {
@@ -833,16 +827,16 @@ body {
   gap: 25px;
 }
 
-@media (min-width: 680px) {
+@media (min-width: 820px) {
   .gifts-grid {
-    grid-template-columns: 1fr 1.15fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .gift-option-card {
   background: #ffffff;
   border-radius: 18px;
-  padding: 35px 26px;
+  padding: 35px 24px;
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-soft);
   position: relative;
@@ -882,6 +876,16 @@ body {
   color: var(--gold-hover);
 }
 
+.store-badge {
+  background: #fdf3f0;
+  color: #c0392b;
+}
+
+.amazon-badge {
+  background: #fef7e7;
+  color: #d35400;
+}
+
 .gift-card-icon {
   font-size: 2.4rem;
   margin-bottom: 12px;
@@ -896,26 +900,79 @@ body {
 }
 
 .gift-card-desc {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+}
+
+.event-number-box {
+  width: 100%;
+  background: #fbf9f5;
+  border: 1px dashed var(--gold-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.event-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.event-code-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.event-code {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: var(--olive-dark);
+}
+
+.gift-card-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.tag-pill {
+  font-size: 0.78rem;
+  color: var(--olive-primary);
+  background: #faf8f5;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  text-align: left;
 }
 
 .gift-card-footer {
+  width: 100%;
   margin-top: auto;
   padding-top: 15px;
 }
 
-.gift-location-tag {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--olive-primary);
-  background: #fbf9f4;
+.envelope-courtesy-note {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  background: #ffffff;
   border: 1px dashed var(--gold-border);
-  padding: 6px 14px;
-  border-radius: 20px;
+  padding: 14px 22px;
+  border-radius: 30px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .bank-details-card {
