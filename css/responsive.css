@@ -216,11 +216,11 @@
 
   /* Centrado fotográfico dedicado para cada toma */
   .editorial-photo-card:nth-child(1) .editorial-img {
-    object-position: 36% 30%;
+    object-position: 46% 22%;
   }
 
   .editorial-photo-card:nth-child(2) .editorial-img {
-    object-position: 50% 25%;
+    object-position: 36% 30%;
   }
 
   .editorial-photo-card:nth-child(3) .editorial-img {
@@ -228,7 +228,7 @@
   }
 
   .editorial-photo-card:nth-child(4) .editorial-img {
-    object-position: 46% 22%;
+    object-position: 50% 25%;
   }
 
   /* Capa de texto elegante y compacta para no tapar a la pareja */
